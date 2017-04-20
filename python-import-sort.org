@@ -1,0 +1,138 @@
+This program was inspired by [[https://news.ycombinator.com/item?id=14156093][this vim plugin]] which when I looked at the Vimscript source code made me wonder about how complex roughly equivalent elsip would look. It was an adventure in learning regexes and Emacs =regexp= foo.
+
+It also is an exploration in applying the /How to Design Programs/ methodology within org-mode using literate programming. There are some rough edges because the code will run in Emacs' significantly stateful context.
+* Purpose
+The script sorts a collection of Python =import= statements alphabetically using the specific name imported. It ignores the =from= prefix of the statement.
+
+* Examples
+Suppose we have the following Python Source 
+#+NAME: example-program
+#+BEGIN_SRC python :tangle no
+  import m
+  import j
+  from a import n
+  from c import k
+  from b import i
+
+  def spam(a):
+      return a
+
+  spam(3)
+#+END_SRC
+
+Running the utility should modify the source to
+#+NAME: modified-example-program
+#+BEGIN_SRC python :tangle no
+  from b import i
+  import j
+  from c import k
+  import m
+  from a import n
+
+  def spam(a):
+      return a
+
+  spam(3)
+#+END_SRC
+
+* Template
+1. Find lines containing import statements
+2. Parse lines to find the name of the import
+3. Sort lines based on name of import
+4. Replace old lines with sorted lines
+#+NAME: main
+#+BEGIN_SRC elisp :noweb tangle :tangle python-import-sort.el
+  <<search-for-import-statements>>
+
+  <<parse-statements-to-find-names>>
+
+  <sort-import-statements-by-name>>
+
+  <<replace-unsorted-statements-with-sorted>>
+#+END_SRC
+** TODO write HTDP code to create an outline from the template.
+* Implementation
+** Find lines containing import statements
+The first plan:
+1. Copy the entire Python source buffer.
+2. Select all of the new buffer.
+3. Use =keep-lines= to remove all lines not containing "import".
+4. Create a list that contains each line as a string.
+5. Return a list of strings.
+*** Copy Python Buffer
+*** Edit new buffer text
+
+** Parse lines to find the name of the import
+*** Story
+I spent a couple of hours (much longer than I expected) goofing around with elisp and regexp's to figure out a way to make string matching work. I am sure there is a simpler way.
+
+The helper function =parse-import-statement= contains the final regex.
+*** Purpose
+To create a data structure upon which the lines can be sorted.
+*** Data Structure
+The data structure is a dotted list. The first element is the original line and the second element is the name of what is actually imported.
+#+BEGIN_EXAMPLE
+("from a import n" . "n")
+#+END_EXAMPLE
+*** Examples
+#+BEGIN_EXAMPLE lisp
+  (parse-import-statements
+    '("import m"
+      "import j"
+      "from a import n"
+      "from c import k"
+      "from b import i"))
+  ; result
+  '(("import m" . "m")
+    ("import j" . "j")
+    ("from a import n" . "n")
+    ("from c import k" . "k")
+    ("from b import i" . "i"))
+#+END_EXAMPLE
+*** Template
+#+NAME: parse-statements-to-find-names
+#+BEGIN_SRC elisp :noweb tangle
+  <<parse-import-statement>>
+
+  (defun parse-import-statements (statements &optional a-list)
+    "Parses each statement in statements. Returns a list of (statement . sort-term)."
+    (if (null statements)
+        a-list
+      (parse-import-statements
+       (rest statements)
+       (cons (parse-import-statement (first statements))
+             a-list))))
+#+END_SRC
+*** Helpers
+#+NAME: parse-import-statement
+#+BEGIN_SRC elisp
+  (defun parse-import-statement (line)
+    "Takes a Python import statement as a string.
+  Returns a dotted list of: (import-statement . sort-term)."
+    (let* ((matcher "\\(\\w+ import \\|import \\)\\(\\w\\)")
+           (match (string-match matcher line)))
+      (cons line (match-string 2 line))))
+#+END_SRC
+**** TODO provide flexibility in matching white space
+Currently, only a single space between =import= and the name is matched.
+*** TODO add test heading
+** Sort lines based on name of import
+** Replace old lines with sorted lines
+* Notes
+** Emacs
+Some useful emacs commands including
+1. =M-x keep-lines=
+2. =M-x flush-lines=
+Some useful elisp:
+1. =string-match= to 'compile' a regex against a string.
+2. =match-string= to extract the groups of a match. These are used in the =parse-import-statement=.
+** HTDP
+The template for writing code using the HTDP recipes is recursive. From the overall high level program down toward each function we have:
+1. Purpose
+2. Examples
+3. Template
+4. Tests (hopefully)
+5. Implementation (sometimes)
+6. Helpers
+
+In the literate programming model the template may be mostly a =noweb= construct. The helpers are there as a short circuit of the recursive structure.
