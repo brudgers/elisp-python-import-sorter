@@ -61,10 +61,43 @@ The first plan:
 *** TODO Copy Python Buffer
 **** TODO Purpose
 To duplicate one Emacs buffer into a new buffer for editing.
-**** TODO Data Structure
-**** TODO Examples
 **** TODO Template 
-**** TODO Helpers 
+#+NAME: copy-python-buffer
+#+BEGIN_SRC elisp :noweb tangle :tangle yes
+  ;;; Copy Python Buffer
+
+  <<import-match>>
+
+  <<buffer-flush-matching-lines>>
+
+  <<buffer-flush-not-matching-lines>>
+
+  <<first-matching-line>>
+
+  ;; use fundamental mode to avoid capturing fontlock information
+  ;; when calling buffer-string
+  (fundamental-mode)
+  (save-excursion
+    (first-matching-line import-match)
+    (let ((place-to-insert (point-marker))
+          (whole-buffer (buffer-string)))
+      ;; delete the matching lines from original buffer
+      (buffer-flush-matching-lines import-match)
+      (insert
+       (with-temp-buffer
+         (fundamental-mode)
+         (insert whole-buffer)
+         (buffer-flush-not-matching-lines import-match)
+         (let
+             ((statements (parse-import-statements (mark-whole-buffer))))
+           <<sort-statement-data>>
+           <<statement-data-to-string>>
+         ))) ; end insert
+      ))
+  ;; restore default mode for file extension
+  (normal-mode)
+#+END_SRC
+**** Helpers 
 #+NAME: import-match
 #+BEGIN_SRC elisp
   ;;; The match string for flushing and keeping
@@ -92,12 +125,11 @@ To duplicate one Emacs buffer into a new buffer for editing.
     (search-forward regex)
     (move-beginning-of-line nil))
 #+END_SRC
-**** TODO Tests
 *** TODO Edit new buffer text
-**** TODO Story
-**** TODO Purpose
-**** TODO Data Structure
-**** TODO Examples
+**** Story
+Takes a string of text that is the contents of a Python buffer and returns a string that contains only the buffer's import statements in sorted order.
+**** Purpose
+Perform edit operations on the original buffer's contents in a temporary buffer.
 **** TODO Template 
 **** TODO Helpers 
 **** TODO Tests
