@@ -50,19 +50,58 @@ Running the utility should modify the source to
 
   <<replace-unsorted-statements-with-sorted>>
 #+END_SRC
-** TODO write HTDP code to create an outline from the template.
 * Implementation
-** Find lines containing import statements
+** TODO Find lines containing import statements
 The first plan:
 1. Copy the entire Python source buffer.
 2. Select all of the new buffer.
 3. Use =keep-lines= to remove all lines not containing "import".
 4. Create a list that contains each line as a string.
 5. Return a list of strings.
-*** Copy Python Buffer
-*** Edit new buffer text
-
-** Parse lines to find the name of the import
+*** TODO Copy Python Buffer
+**** TODO Purpose
+To duplicate one Emacs buffer into a new buffer for editing.
+**** TODO Data Structure
+**** TODO Examples
+**** TODO Template 
+**** TODO Helpers 
+#+NAME: import-match
+#+BEGIN_SRC elisp
+  ;;; The match string for flushing and keeping
+  (setq import-match "import")
+#+END_SRC
+#+NAME: buffer-flush-matching-lines
+#+BEGIN_SRC elisp
+  (defun buffer-flush-matching-lines (regex)
+    "Flushes matching lines from buffer."
+    (mark-whole-buffer)
+    (flush-lines regex))
+#+END_SRC
+#+NAME: buffer-flush-not-matching-lines
+#+BEGIN_SRC elisp
+  (defun buffer-flush-not-matching-lines (regex)
+    "Removes non-matching lines from buffer."
+      (mark-whole-buffer)
+      (keep-lines regex))
+#+END_SRC
+#+NAME: first-matching-line
+#+BEGIN_SRC elisp
+  (defun first-matching-line (regex)
+    "Finds the start of line for the first line matching regex."
+    (beginning-of-buffer)
+    (search-forward regex)
+    (move-beginning-of-line nil))
+#+END_SRC
+**** TODO Tests
+*** TODO Edit new buffer text
+**** TODO Story
+**** TODO Purpose
+**** TODO Data Structure
+**** TODO Examples
+**** TODO Template 
+**** TODO Helpers 
+**** TODO Tests
+** DONE Parse lines to find the name of the import
 *** Story
 I spent a couple of hours (much longer than I expected) goofing around with elisp and regexp's to figure out a way to make string matching work. I am sure there is a simpler way.
 
@@ -116,8 +155,8 @@ The data structure is a dotted list. The first element is the original line and 
 **** TODO provide flexibility in matching white space
 Currently, only a single space between =import= and the name is matched.
 *** TODO add test heading
-** Sort lines based on name of import
-** Replace old lines with sorted lines
+** TODO Sort lines based on name of import
+** TODO Replace old lines with sorted lines
 * Notes
 ** Emacs
 Some useful emacs commands including
@@ -136,3 +175,4 @@ The template for writing code using the HTDP recipes is recursive. From the over
 6. Helpers
 
 In the literate programming model the template may be mostly a =noweb= construct. The helpers are there as a short circuit of the recursive structure.
+** TODO write elisp code to create an HTDP outline from the template.
