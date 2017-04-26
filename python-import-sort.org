@@ -1,67 +1,67 @@
 This program was inspired by [[https://news.ycombinator.com/item?id=14156093][this vim plugin]] which when I looked at the Vimscript source code made me wonder about how complex roughly equivalent elsip would look. It was an adventure in learning regexes and Emacs =regexp= foo.
 
 It also is an exploration in applying the /How to Design Programs/ methodology within org-mode using literate programming. There are some rough edges because the code will run in Emacs' significantly stateful context.
-* Purpose
-The script sorts a collection of Python =import= statements alphabetically using the specific name imported. It ignores the =from= prefix of the statement.
+* Overview
+** Purpose
+ The script sorts a collection of Python =import= statements alphabetically using the specific name imported. It ignores the =from= prefix of the statement.
 
-* Examples
-Suppose we have the following Python Source 
-#+NAME: example-program
-#+BEGIN_SRC python :tangle no
-  import m
-  import j
-  from a import n
-  from c import k
-  from b import i
+** Examples
+ Suppose we have the following Python Source 
+ #+NAME: example-program
+ #+BEGIN_SRC python :tangle no
+   import m
+   import j
+   from a import n
+   from c import k
+   from b import i
 
-  def spam(a):
-      return a
+   def spam(a):
+       return a
 
-  spam(3)
-#+END_SRC
+   spam(3)
+ #+END_SRC
 
-Running the utility should modify the source to
-#+NAME: modified-example-program
-#+BEGIN_SRC python :tangle no
-  from b import i
-  import j
-  from c import k
-  import m
-  from a import n
+ Running the utility should modify the source to
+ #+NAME: modified-example-program
+ #+BEGIN_SRC python :tangle no
+   from b import i
+   import j
+   from c import k
+   import m
+   from a import n
 
-  def spam(a):
-      return a
+   def spam(a):
+       return a
 
-  spam(3)
-#+END_SRC
+   spam(3)
+ #+END_SRC
 
-* Template
-1. Find lines containing import statements
-2. Parse lines to find the name of the import
-3. Sort lines based on name of import
-4. Replace old lines with sorted lines
-#+NAME: main
-#+BEGIN_SRC elisp :noweb tangle :tangle python-import-sort.el
-  <<search-for-import-statements>>
+** Template
+ 1. Find lines containing import statements
+ 2. Parse lines to find the name of the import
+ 3. Sort lines based on name of import
+ 4. Replace old lines with sorted lines
+ #+NAME: main
+ #+BEGIN_SRC elisp :noweb tangle :tangle python-import-sort.el
+   <<search-for-import-statements>>
 
-  <<parse-statements-to-find-names>>
+   <<parse-statements-to-find-names>>
 
-  <sort-import-statements-by-name>>
+   <sort-import-statements-by-name>>
 
-  <<replace-unsorted-statements-with-sorted>>
-#+END_SRC
-* Implementation
-** TODO Find lines containing import statements
+   <<replace-unsorted-statements-with-sorted>>
+ #+END_SRC
+* TODO Find lines containing import statements
 The first plan:
 1. Copy the entire Python source buffer.
 2. Select all of the new buffer.
 3. Use =keep-lines= to remove all lines not containing "import".
 4. Create a list that contains each line as a string.
 5. Return a list of strings.
-*** TODO Copy Python Buffer
-**** TODO Purpose
+** TODO Copy Python Buffer
+*** TODO Purpose
 To duplicate one Emacs buffer into a new buffer for editing.
-**** TODO Template 
+*** TODO Template 
 #+NAME: copy-python-buffer
 #+BEGIN_SRC elisp :noweb tangle :tangle yes
   ;;; Copy Python Buffer
@@ -84,20 +84,12 @@ To duplicate one Emacs buffer into a new buffer for editing.
       ;; delete the matching lines from original buffer
       (buffer-flush-matching-lines import-match)
       (insert
-       (with-temp-buffer
-         (fundamental-mode)
-         (insert whole-buffer)
-         (buffer-flush-not-matching-lines import-match)
-         (let
-             ((statements (parse-import-statements (mark-whole-buffer))))
-           <<sort-statement-data>>
-           <<statement-data-to-string>>
-         ))) ; end insert
+       <<edit-new-buffer-text>>) ; end insert
       ))
   ;; restore default mode for file extension
   (normal-mode)
 #+END_SRC
-**** Helpers 
+*** Helpers 
 #+NAME: import-match
 #+BEGIN_SRC elisp
   ;;; The match string for flushing and keeping
@@ -125,27 +117,40 @@ To duplicate one Emacs buffer into a new buffer for editing.
     (search-forward regex)
     (move-beginning-of-line nil))
 #+END_SRC
-*** TODO Edit new buffer text
-**** Story
-Takes a string of text that is the contents of a Python buffer and returns a string that contains only the buffer's import statements in sorted order.
-**** Purpose
-Perform edit operations on the original buffer's contents in a temporary buffer.
-**** TODO Template 
-**** TODO Helpers 
-**** TODO Tests
-** DONE Parse lines to find the name of the import
+** TODO Edit new buffer text
 *** Story
+Takes a string of text that is the contents of a Python buffer and returns a string that contains only the buffer's import statements in sorted order.
+*** Purpose
+Perform edit operations on the original buffer's contents in a temporary buffer.
+*** TODO Template
+This component depends on the locally scoped lexical =whole-buffer=.
+#+NAME: edit-new-buffer-text
+#+BEGIN_SRC elisp
+  (with-temp-buffer
+           (fundamental-mode)
+           (insert whole-buffer)
+           (buffer-flush-not-matching-lines import-match)
+           (let
+               ((statements (parse-import-statements (mark-whole-buffer))))
+             <<sort-statement-data>>
+             <<statement-data-to-string>>
+           ))
+#+END_SRC
+*** TODO Helpers 
+*** TODO Tests
+* DONE Parse lines to find the name of the import
+** Story
 I spent a couple of hours (much longer than I expected) goofing around with elisp and regexp's to figure out a way to make string matching work. I am sure there is a simpler way.
 
 The helper function =parse-import-statement= contains the final regex.
-*** Purpose
+** Purpose
 To create a data structure upon which the lines can be sorted.
-*** Data Structure
+** Data Structure
 The data structure is a dotted list. The first element is the original line and the second element is the name of what is actually imported.
 #+BEGIN_EXAMPLE
 ("from a import n" . "n")
 #+END_EXAMPLE
-*** Examples
+** Examples
 #+BEGIN_EXAMPLE lisp
   (parse-import-statements
     '("import m"
@@ -160,7 +165,7 @@ The data structure is a dotted list. The first element is the original line and 
     ("from c import k" . "k")
     ("from b import i" . "i"))
 #+END_EXAMPLE
-*** Template
+** Template
 #+NAME: parse-statements-to-find-names
 #+BEGIN_SRC elisp :noweb tangle
   <<parse-import-statement>>
@@ -174,7 +179,7 @@ The data structure is a dotted list. The first element is the original line and 
        (cons (parse-import-statement (first statements))
              a-list))))
 #+END_SRC
-*** Helpers
+** Helpers
 #+NAME: parse-import-statement
 #+BEGIN_SRC elisp
   (defun parse-import-statement (line)
@@ -184,11 +189,61 @@ The data structure is a dotted list. The first element is the original line and 
            (match (string-match matcher line)))
       (cons line (match-string 2 line))))
 #+END_SRC
-**** TODO provide flexibility in matching white space
+*** TODO provide flexibility in matching white space
 Currently, only a single space between =import= and the name is matched.
-*** TODO add test heading
-** TODO Sort lines based on name of import
-** TODO Replace old lines with sorted lines
+** TODO add test heading
+* TODO Sort lines based on name of import
+** Data Structure
+The data structure is a dotted list. The first element is the original line and the second element is the name of the python module to be imported.
+#+BEGIN_EXAMPLE
+("from a import n" . "n")
+#+END_EXAMPLE
+** Template
+#+NAME: sort-lines-based-on-name-of-import
+#+BEGIN_SRC elisp :noweb tangle :tangle yes
+  ;;; sort lines based on name of import
+
+  <<python-module-less-than>>
+
+  <<sort-python-modules>>
+#+END_SRC
+** Helpers
+*** python-module-less-than
+Compare two data structures based on second element which is the name of the python module.
+#+NAME: python-module-less-than
+#+BEGIN_SRC elisp
+  ;;; sorting helper
+  (defun python-module-less-than (lhs rhs)
+    "Returns true if the module name of the left hand side is less than the module name of the right hand side."
+    (string< (second lhs) (second rhs)))
+#+END_SRC
+*** sort-python-modules
+Sort data structures based on second element which is the name of the module.
+#+NAME: sort-python-modules
+#+BEGIN_SRC elisp
+  ;;; sorting helper
+  (defun sort-python-modules (structures)
+    "Sorts data structures using data-structure-less-than"
+    (sort structures python-module-less-than))
+#+END_SRC
+*** insert-python-import-statement
+Insert data structure string.
+#+NAME: insert-python-import-statement
+#+BEGIN_SRC elisp
+  (defun insert-python-import-statement (ds)
+    "Inserts the string (car) of a data structure into current buffer"
+    (insert (car ds))
+    (newline))
+#+END_SRC
+*** insert-python-import-statements
+Insert strings from all data structures. Uses =mapc= instead of =mapcar= because it is called for side-effects.
+#+NAME: insert-python-import-statements
+#+BEGIN_SRC elisp
+  (defun insert-python-import-statements (structures)
+    "Inserts the ordered statements into current buffer."
+    (mapc insert-python-import-statement structures))
+#+END_SRC
+* TODO Replace old lines with sorted lines
 * Notes
 ** Emacs
 Some useful emacs commands including

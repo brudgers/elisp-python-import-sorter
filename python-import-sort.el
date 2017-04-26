@@ -48,14 +48,26 @@ Returns a dotted list of: (import-statement . sort-term)."
     (buffer-flush-matching-lines import-match)
     (insert
      (with-temp-buffer
-       (fundamental-mode)
-       (insert whole-buffer)
-       (buffer-flush-not-matching-lines import-match)
-       (let
-           ((statements (parse-import-statements (mark-whole-buffer))))
-         
-         
-       ))) ; end insert
+              (fundamental-mode)
+              (insert whole-buffer)
+              (buffer-flush-not-matching-lines import-match)
+              (let
+                  ((statements (parse-import-statements (mark-whole-buffer))))
+                
+                
+              ))) ; end insert
     ))
 ;; restore default mode for file extension
 (normal-mode)
+
+;;; sort lines based on name of import
+
+;;; sorting helper
+(defun python-module-less-than (lhs rhs)
+  "Returns true if the module name of the left hand side is less than the module name of the right hand side."
+  (string< (second lhs) (second rhs)))
+
+;;; sorting helper
+(defun sort-python-modules (structures)
+  "Sorts data structures using data-structure-less-than"
+  (sort structures python-module-less-than))
