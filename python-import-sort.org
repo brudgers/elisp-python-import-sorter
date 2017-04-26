@@ -226,6 +226,8 @@ Sort data structures based on second element which is the name of the module.
     "Sorts data structures using data-structure-less-than"
     (sort structures python-module-less-than))
 #+END_SRC
+* TODO Replace old lines with sorted lines
+** Helpers
 *** insert-python-import-statement
 Insert data structure string.
 #+NAME: insert-python-import-statement
@@ -243,7 +245,7 @@ Insert strings from all data structures. Uses =mapc= instead of =mapcar= because
     "Inserts the ordered statements into current buffer."
     (mapc insert-python-import-statement structures))
 #+END_SRC
-* TODO Replace old lines with sorted lines
+
 * Notes
 ** Emacs
 Some useful emacs commands including
