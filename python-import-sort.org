@@ -43,28 +43,45 @@ It also is an exploration in applying the /How to Design Programs/ methodology w
  4. Replace old lines with sorted lines
  #+NAME: main
  #+BEGIN_SRC elisp :noweb tangle :tangle python-import-sort.el
-   <<search-for-import-statements>>
+   (defun python-import-sort ()
+     (interactive)
+     (fundamental-mode)
+     (save-excursion
+       (first-matching-line import-match)
+       (let ((place-to-insert (point-marker))
+             (whole-buffer (buffer-string)))
+         (with-temp-buffer
+           (fundamental-mode)
+           <<edit-temp-buffer>>
+           (setq whole-buffer (buffer string))); end with-temp-buffer
+         <<edit-source-buffer>>)))
 
-   <<parse-statements-to-find-names>>
+   ;;; Helpers
 
-   <sort-import-statements-by-name>>
+   <<search-helpers>>
 
-   <<replace-unsorted-statements-with-sorted>>
+   <<parse-helpers>>
+
+   <<sort-helpers>>
+
+   <<replace-helpers>>
  #+END_SRC
-* TODO Find lines containing import statements
-The first plan:
-1. Copy the entire Python source buffer.
-2. Select all of the new buffer.
-3. Use =keep-lines= to remove all lines not containing "import".
-4. Create a list that contains each line as a string.
-5. Return a list of strings.
-** TODO Copy Python Buffer
-*** TODO Purpose
-To duplicate one Emacs buffer into a new buffer for editing.
-*** TODO Template 
-#+NAME: copy-python-buffer
-#+BEGIN_SRC elisp :noweb tangle :tangle yes
-  ;;; Copy Python Buffer
+** Outline
+7. Replace existing import statements
+#+BEGIN_SRC elisp
+  ;; delete the matching lines from original buffer
+  (buffer-flush-matching-lines import-match)
+  (insert whole-buffer)
+#+END_SRC
+8. End excursion
+#+BEGIN_SRC elisp
+    )) ; end let end excursion
+  (normal-mode)
+#+END_SRC
+* Search Helpers
+#+NAME: search-helpers
+#+BEGIN_SRC elisp :noweb-tangle
+  ;;; Search Helpers
 
   <<import-match>>
 
@@ -73,28 +90,14 @@ To duplicate one Emacs buffer into a new buffer for editing.
   <<buffer-flush-not-matching-lines>>
 
   <<first-matching-line>>
-
-  ;; use fundamental mode to avoid capturing fontlock information
-  ;; when calling buffer-string
-  (fundamental-mode)
-  (save-excursion
-    (first-matching-line import-match)
-    (let ((place-to-insert (point-marker))
-          (whole-buffer (buffer-string)))
-      ;; delete the matching lines from original buffer
-      (buffer-flush-matching-lines import-match)
-      (insert
-       <<edit-new-buffer-text>>) ; end insert
-      ))
-  ;; restore default mode for file extension
-  (normal-mode)
 #+END_SRC
-*** Helpers 
+** import-match 
 #+NAME: import-match
 #+BEGIN_SRC elisp
   ;;; The match string for flushing and keeping
   (setq import-match "import")
 #+END_SRC
+** buffer-flush-matching-lines
 #+NAME: buffer-flush-matching-lines
 #+BEGIN_SRC elisp
   (defun buffer-flush-matching-lines (regex)
@@ -102,6 +105,7 @@ To duplicate one Emacs buffer into a new buffer for editing.
     (mark-whole-buffer)
     (flush-lines regex))
 #+END_SRC
+** buffer-flush-not-matching-lines
 #+NAME: buffer-flush-not-matching-lines
 #+BEGIN_SRC elisp
   (defun buffer-flush-not-matching-lines (regex)
@@ -109,6 +113,7 @@ To duplicate one Emacs buffer into a new buffer for editing.
       (mark-whole-buffer)
       (keep-lines regex))
 #+END_SRC
+** first-matching-line
 #+NAME: first-matching-line
 #+BEGIN_SRC elisp
   (defun first-matching-line (regex)
@@ -117,28 +122,7 @@ To duplicate one Emacs buffer into a new buffer for editing.
     (search-forward regex)
     (move-beginning-of-line nil))
 #+END_SRC
-** TODO Edit new buffer text
-*** Story
-Takes a string of text that is the contents of a Python buffer and returns a string that contains only the buffer's import statements in sorted order.
-*** Purpose
-Perform edit operations on the original buffer's contents in a temporary buffer.
-*** TODO Template
-This component depends on the locally scoped lexical =whole-buffer=.
-#+NAME: edit-new-buffer-text
-#+BEGIN_SRC elisp
-  (with-temp-buffer
-           (fundamental-mode)
-           (insert whole-buffer)
-           (buffer-flush-not-matching-lines import-match)
-           (let
-               ((statements (parse-import-statements (mark-whole-buffer))))
-             <<sort-statement-data>>
-             <<statement-data-to-string>>
-           ))
-#+END_SRC
-*** TODO Helpers 
-*** TODO Tests
-* DONE Parse lines to find the name of the import
+* Parse Helpers
 ** Story
 I spent a couple of hours (much longer than I expected) goofing around with elisp and regexp's to figure out a way to make string matching work. I am sure there is a simpler way.
 
@@ -166,10 +150,18 @@ The data structure is a dotted list. The first element is the original line and 
     ("from b import i" . "i"))
 #+END_EXAMPLE
 ** Template
-#+NAME: parse-statements-to-find-names
+#+NAME: parse-helpers
 #+BEGIN_SRC elisp :noweb tangle
+  ;;; Parse Helpers
+
   <<parse-import-statement>>
 
+  <<parse-import-statements>>
+#+END_SRC
+** Helpers
+The high level parsing function:
+#+NAME: parse-import-statements
+#+BEGIN_SRC elisp
   (defun parse-import-statements (statements &optional a-list)
     "Parses each statement in statements. Returns a list of (statement . sort-term)."
     (if (null statements)
@@ -179,7 +171,7 @@ The data structure is a dotted list. The first element is the original line and 
        (cons (parse-import-statement (first statements))
              a-list))))
 #+END_SRC
-** Helpers
+Parse one import statement
 #+NAME: parse-import-statement
 #+BEGIN_SRC elisp
   (defun parse-import-statement (line)
@@ -191,8 +183,7 @@ The data structure is a dotted list. The first element is the original line and 
 #+END_SRC
 *** TODO provide flexibility in matching white space
 Currently, only a single space between =import= and the name is matched.
-** TODO add test heading
-* TODO Sort lines based on name of import
+* Sort Helpers
 ** Data Structure
 The data structure is a dotted list. The first element is the original line and the second element is the name of the python module to be imported.
 #+BEGIN_EXAMPLE
