@@ -1,0 +1,22 @@
+(defun python-import-sort ()
+  (interactive)
+  (fundamental-mode)
+  (save-excursion
+    (first-matching-line import-match)
+    (let ((place-to-insert (point-marker))
+          (whole-buffer (buffer-string)))
+      (with-temp-buffer
+        (fundamental-mode)
+        <<edit-temp-buffer>>
+        (setq whole-buffer (buffer string))); end with-temp-buffer
+      <<edit-source-buffer>>)))
+
+;;; Helpers
+
+<<search-helpers>>
+
+<<parse-helpers>>
+
+<<sort-helpers>>
+
+<<replace-helpers>>

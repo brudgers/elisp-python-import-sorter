@@ -43,14 +43,63 @@ It also is an exploration in applying the /How to Design Programs/ methodology w
  4. Replace old lines with sorted lines
  #+NAME: main
  #+BEGIN_SRC elisp :noweb tangle :tangle python-import-sort.el
-   <<search-for-import-statements>>
+   (defun python-import-sort ()
+     (interactive)
+     (fundamental-mode)
+     (save-excursion
+       (first-matching-line import-match)
+       (let ((place-to-insert (point-marker))
+             (whole-buffer (buffer-string)))
+         (with-temp-buffer
+           (fundamental-mode)
+           <<edit-temp-buffer>>
+           (setq whole-buffer (buffer string))); end with-temp-buffer
+         <<edit-source-buffer>>)))
 
-   <<parse-statements-to-find-names>>
+   ;;; Helpers
 
-   <sort-import-statements-by-name>>
+   <<search-helpers>>
 
-   <<replace-unsorted-statements-with-sorted>>
+   <<parse-helpers>>
+
+   <<sort-helpers>>
+
+   <<replace-helpers>>
  #+END_SRC
+** Outline
+0. Begin excursion
+#+BEGIN_SRC elisp
+
+#+END_SRC
+1. create variables and copy source buffer
+#+BEGIN_SRC elisp
+
+#+END_SRC
+2. Create temporary buffer
+#+BEGIN_SRC elisp
+  (with-temp-buffer
+#+END_SRC
+3. Insert source into temporary buffer
+4. Edit text in temporary buffer
+#+BEGIN_SRC elisp
+  (fundamental-mode)
+#+END_SRC
+5. Copy entire temporary buffer and close
+#+BEGIN_SRC elisp
+ 
+  );end with-temp-buffer
+#+END_SRC
+7. Replace existing import statements
+#+BEGIN_SRC elisp
+  ;; delete the matching lines from original buffer
+  (buffer-flush-matching-lines import-match)
+  (insert whole-buffer)
+#+END_SRC
+8. End excursion
+#+BEGIN_SRC elisp
+    )) ; end let end excursion
+  (normal-mode)
+#+END_SRC
 * TODO Find lines containing import statements
 The first plan:
 1. Copy the entire Python source buffer.
