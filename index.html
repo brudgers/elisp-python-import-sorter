@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-04-28 Fri 16:21 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="benrudgers" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org097e834">Overview</a>
+<ul>
+<li><a href="#orgf86fc94">Purpose</a></li>
+<li><a href="#org6e0ab50">Examples</a></li>
+<li><a href="#org8608b1a">Template</a></li>
+</ul>
+</li>
+<li><a href="#orga2a673d"><span class="todo TODO">TODO</span> Edit Temp Buffer</a></li>
+<li><a href="#orgb5fa543"><span class="todo TODO">TODO</span> Edit Source Buffer</a></li>
+<li><a href="#org7d7f425"><span class="done DONE">DONE</span> Search Helpers</a>
+<ul>
+<li><a href="#orgb8de4df">import-match</a></li>
+<li><a href="#org39d5e32">buffer-flush-matching-lines</a></li>
+<li><a href="#org5049185">buffer-flush-not-matching-lines</a></li>
+<li><a href="#org844b65e">first-matching-line</a></li>
+</ul>
+</li>
+<li><a href="#org4d098b2"><span class="todo TODO">TODO</span> Parse Helpers</a>
+<ul>
+<li><a href="#orgd715468">Purpose</a></li>
+<li><a href="#org3ad1236">Data Structure</a></li>
+<li><a href="#org24ad1e1">Examples</a></li>
+<li><a href="#orgf8eb8e2">Template</a></li>
+<li><a href="#orgd64c086">Helpers</a>
+<ul>
+<li><a href="#org1083fb5"><span class="todo TODO">TODO</span> provide flexibility in matching white space</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org6953260"><span class="todo TODO">TODO</span> Sort Helpers</a>
+<ul>
+<li><a href="#org0f90511">Data Structure</a></li>
+<li><a href="#org181fbac">Template</a></li>
+<li><a href="#org4567276">Helpers</a>
+<ul>
+<li><a href="#orgf51e6bc">python-module-less-than</a></li>
+<li><a href="#org5ce16bc">sort-python-modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgf4fbba8"><span class="todo TODO">TODO</span> Replace old lines with sorted lines</a>
+<ul>
+<li><a href="#org8f96c6b">Helpers</a>
+<ul>
+<li><a href="#org11c122e">insert-python-import-statement</a></li>
+<li><a href="#org2201cb1">insert-python-import-statements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org5cafc73">Notes</a>
+<ul>
+<li><a href="#orge5a05b5">Emacs</a></li>
+<li><a href="#org4744f86">HTDP</a></li>
+<li><a href="#orgce8bc50"><span class="todo TODO">TODO</span> write elisp code to create an HTDP outline from the template.</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+This program was inspired by <a href="https://news.ycombinator.com/item?id=14156093">this vim plugin</a> which when I looked at the Vimscript source code made me wonder about how complex roughly equivalent elsip would look. It was an adventure in learning regexes and Emacs <code>regexp</code> foo.
+</p>
+
+<p>
+It also is an exploration in applying the <i>How to Design Programs</i> methodology within org-mode using literate programming. There are some rough edges because the code will run in Emacs' significantly stateful context.
+</p>
+<div id="outline-container-org097e834" class="outline-2">
+<h2 id="org097e834">Overview</h2>
+<div class="outline-text-2" id="text-org097e834">
+</div><div id="outline-container-orgf86fc94" class="outline-3">
+<h3 id="orgf86fc94">Purpose</h3>
+<div class="outline-text-3" id="text-orgf86fc94">
+<p>
+The script sorts a collection of Python <code>import</code> statements alphabetically using the specific name imported. It ignores the <code>from</code> prefix of the statement.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6e0ab50" class="outline-3">
+<h3 id="org6e0ab50">Examples</h3>
+<div class="outline-text-3" id="text-org6e0ab50">
+<p>
+Suppose we have the following Python Source 
+</p>
+<div class="org-src-container">
+<pre class="src src-python" id="org62b9a54">import m
+import j
+from a import n
+from c import k
+from b import i
+
+def spam(a):
+    return a
+
+spam(3)
+</pre>
+</div>
+
+<p>
+Running the utility should modify the source to
+</p>
+<div class="org-src-container">
+<pre class="src src-python" id="org397ae91">from b import i
+import j
+from c import k
+import m
+from a import n
+
+def spam(a):
+    return a
+
+spam(3)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8608b1a" class="outline-3">
+<h3 id="org8608b1a">Template</h3>
+<div class="outline-text-3" id="text-org8608b1a">
+<ol class="org-ol">
+<li>Find lines containing import statements</li>
+<li>Parse lines to find the name of the import</li>
+<li>Sort lines based on name of import</li>
+<li>Replace old lines with sorted lines</li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-elisp" id="org69269ae">(defun python-import-sort ()
+  (interactive)
+  (fundamental-mode)
+  (save-excursion
+    (first-matching-line import-match)
+    (let ((place-to-insert (point-marker))
+          (whole-buffer (buffer-string)))
+      (with-temp-buffer
+        (fundamental-mode)
+        &lt;&lt;edit-temp-buffer&gt;&gt;
+        (setq whole-buffer (buffer string))); end with-temp-buffer
+      &lt;&lt;edit-source-buffer&gt;&gt;)))
+
+;;; Helpers
+
+&lt;&lt;search-helpers&gt;&gt;
+
+&lt;&lt;parse-helpers&gt;&gt;
+
+&lt;&lt;sort-helpers&gt;&gt;
+
+&lt;&lt;replace-helpers&gt;&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orga2a673d" class="outline-2">
+<h2 id="orga2a673d"><span class="todo TODO">TODO</span> Edit Temp Buffer</h2>
+</div>
+<div id="outline-container-orgb5fa543" class="outline-2">
+<h2 id="orgb5fa543"><span class="todo TODO">TODO</span> Edit Source Buffer</h2>
+</div>
+<div id="outline-container-org7d7f425" class="outline-2">
+<h2 id="org7d7f425"><span class="done DONE">DONE</span> Search Helpers</h2>
+<div class="outline-text-2" id="text-org7d7f425">
+<p>
+A collection of functions to facillitate searching a buffer and operating upon the buffer based on search.
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp" id="org8a98dfc">;;; Search Helper
+
+&lt;&lt;import-match&gt;&gt;
+
+&lt;&lt;buffer-flush-matching-lines&gt;&gt;
+
+&lt;&lt;buffer-flush-not-matching-lines&gt;&gt;
+
+&lt;&lt;first-matching-line&gt;&gt;
+</pre>
+</div>
+</div>
+<div id="outline-container-orgb8de4df" class="outline-3">
+<h3 id="orgb8de4df">import-match</h3>
+<div class="outline-text-3" id="text-orgb8de4df">
+<ul class="org-ul">
+<li><b>Purpose</b>
+A constant for matching import statements. Here the value is a simple string but it could be a <code>regexp</code>.</li>
+<li><p>
+<b>Implementation</b>
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp" id="org70b9d9f">;;; The match string for flushing and keeping
+(setq import-match "import")
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org39d5e32" class="outline-3">
+<h3 id="org39d5e32">buffer-flush-matching-lines</h3>
+<div class="outline-text-3" id="text-org39d5e32">
+<ul class="org-ul">
+<li><b>Purpose</b>
+Purge/flush all lines from a buffer that match a <code>regexp</code>.</li>
+<li><p>
+<b>Example</b>
+</p>
+<pre class="example">
+Given a buffer containing.
+
+  # Using spam
+  import spam
+  spam.eggs(4)
+  print("eggs are tasty")
+  spam.spam('spam')
+
+Calling buffer-flush-matching-lines("eggs") yields
+
+  # a comment
+  import spam
+  spam.spam('spam')
+</pre></li>
+<li><p>
+<b>Implementation</b>
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp" id="org69e9e58">(defun buffer-flush-matching-lines (regex)
+  "Flushes matching lines from buffer."
+  (mark-whole-buffer)
+  (flush-lines regex))
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5049185" class="outline-3">
+<h3 id="org5049185">buffer-flush-not-matching-lines</h3>
+<div class="outline-text-3" id="text-org5049185">
+<ul class="org-ul">
+<li><b>Purpose</b>
+Purge/flush all lines from a buffer that do not match a <code>regexp</code>.</li>
+<li><p>
+<b>Example</b>
+</p>
+<pre class="example">
+Given a buffer containing.
+
+  # Using spam
+  import spam
+  spam.eggs(4)
+  print("eggs are tasty")
+  spam.spam('spam')
+
+Calling buffer-flush-not-matching-lines("eggs") yields
+
+  spam.eggs(4)
+  print("eggs are tasty")
+</pre></li>
+<li><p>
+<b>Implementation</b>
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp" id="orga410bbb">(defun buffer-flush-not-matching-lines (regex)
+  "Removes non-matching lines from buffer."
+    (mark-whole-buffer)
+    (keep-lines regex))
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org844b65e" class="outline-3">
+<h3 id="org844b65e">first-matching-line</h3>
+<div class="outline-text-3" id="text-org844b65e">
+<ul class="org-ul">
+<li><b>Purpose</b>
+Plase point at start of first line in buffer that contains match for <code>regexp</code></li>
+<li><p>
+<b>Example</b>
+</p>
+<pre class="example">
+Given a buffer containing.
+
+  # Using spam
+  import spam
+  spam.eggs(4)
+  print("eggs are tasty")
+  spam.spam('spam')
+
+Calling first-matching-line("eggs") moves the point to the beginning of
+
+  spam.eggs(4)
+</pre></li>
+<li><p>
+<b>Implementation</b>
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp" id="orgd552a08">(defun first-matching-line (regex)
+  "Finds the start of line for the first line matching regex."
+  (beginning-of-buffer)
+  (search-forward regex)
+  (move-beginning-of-line nil))
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org4d098b2" class="outline-2">
+<h2 id="org4d098b2"><span class="todo TODO">TODO</span> Parse Helpers</h2>
+<div class="outline-text-2" id="text-org4d098b2">
+<p>
+ Story
+I spent a couple of hours (much longer than I expected) goofing around with elisp and regexp's to figure out a way to make string matching work. I am sure there is a simpler way.
+</p>
+
+<p>
+The helper function <code>parse-import-statement</code> contains the final regex.
+</p>
+</div>
+<div id="outline-container-orgd715468" class="outline-3">
+<h3 id="orgd715468">Purpose</h3>
+<div class="outline-text-3" id="text-orgd715468">
+<p>
+To create a data structure upon which the lines can be sorted.
+</p>
+</div>
+</div>
+<div id="outline-container-org3ad1236" class="outline-3">
+<h3 id="org3ad1236">Data Structure</h3>
+<div class="outline-text-3" id="text-org3ad1236">
+<p>
+The data structure is a dotted list. The first element is the original line and the second element is the name of what is actually imported.
+</p>
+<pre class="example">
+("from a import n" . "n")
+</pre>
+</div>
+</div>
+<div id="outline-container-org24ad1e1" class="outline-3">
+<h3 id="org24ad1e1">Examples</h3>
+<div class="outline-text-3" id="text-org24ad1e1">
+<pre class="example">
+(parse-import-statements
+  '("import m"
+    "import j"
+    "from a import n"
+    "from c import k"
+    "from b import i"))
+; result
+'(("import m" . "m")
+  ("import j" . "j")
+  ("from a import n" . "n")
+  ("from c import k" . "k")
+  ("from b import i" . "i"))
+</pre>
+</div>
+</div>
+<div id="outline-container-orgf8eb8e2" class="outline-3">
+<h3 id="orgf8eb8e2">Template</h3>
+<div class="outline-text-3" id="text-orgf8eb8e2">
+<div class="org-src-container">
+<pre class="src src-elisp" id="orga1ee6d0">;;; Parse Helpers
+
+&lt;&lt;parse-import-statement&gt;&gt;
+
+&lt;&lt;parse-import-statements&gt;&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd64c086" class="outline-3">
+<h3 id="orgd64c086">Helpers</h3>
+<div class="outline-text-3" id="text-orgd64c086">
+<p>
+The high level parsing function:
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp" id="org459d121">(defun parse-import-statements (statements &amp;optional a-list)
+  "Parses each statement in statements. Returns a list of (statement . sort-term)."
+  (if (null statements)
+      a-list
+    (parse-import-statements
+     (rest statements)
+     (cons (parse-import-statement (first statements))
+           a-list))))
+</pre>
+</div>
+<p>
+Parse one import statement
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp" id="org2d9fad3">(defun parse-import-statement (line)
+  "Takes a Python import statement as a string.
+Returns a dotted list of: (import-statement . sort-term)."
+  (let* ((matcher "\\(\\w+ import \\|import \\)\\(\\w\\)")
+         (match (string-match matcher line)))
+    (cons line (match-string 2 line))))
+</pre>
+</div>
+</div>
+<div id="outline-container-org1083fb5" class="outline-4">
+<h4 id="org1083fb5"><span class="todo TODO">TODO</span> provide flexibility in matching white space</h4>
+<div class="outline-text-4" id="text-org1083fb5">
+<p>
+Currently, only a single space between <code>import</code> and the name is matched.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org6953260" class="outline-2">
+<h2 id="org6953260"><span class="todo TODO">TODO</span> Sort Helpers</h2>
+<div class="outline-text-2" id="text-org6953260">
+</div><div id="outline-container-org0f90511" class="outline-3">
+<h3 id="org0f90511">Data Structure</h3>
+<div class="outline-text-3" id="text-org0f90511">
+<p>
+The data structure is a dotted list. The first element is the original line and the second element is the name of the python module to be imported.
+</p>
+<pre class="example">
+("from a import n" . "n")
+</pre>
+</div>
+</div>
+<div id="outline-container-org181fbac" class="outline-3">
+<h3 id="org181fbac">Template</h3>
+<div class="outline-text-3" id="text-org181fbac">
+<div class="org-src-container">
+<pre class="src src-elisp" id="org9ce7b70">;;; sort lines based on name of import
+
+&lt;&lt;python-module-less-than&gt;&gt;
+
+&lt;&lt;sort-python-modules&gt;&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4567276" class="outline-3">
+<h3 id="org4567276">Helpers</h3>
+<div class="outline-text-3" id="text-org4567276">
+</div><div id="outline-container-orgf51e6bc" class="outline-4">
+<h4 id="orgf51e6bc">python-module-less-than</h4>
+<div class="outline-text-4" id="text-orgf51e6bc">
+<p>
+Compare two data structures based on second element which is the name of the python module.
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp" id="org150a7ad">;;; sorting helper
+(defun python-module-less-than (lhs rhs)
+  "Returns true if the module name of the left hand side is less than the module name of the right hand side."
+  (string&lt; (second lhs) (second rhs)))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5ce16bc" class="outline-4">
+<h4 id="org5ce16bc">sort-python-modules</h4>
+<div class="outline-text-4" id="text-org5ce16bc">
+<p>
+Sort data structures based on second element which is the name of the module.
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp" id="org90afe3c">;;; sorting helper
+(defun sort-python-modules (structures)
+  "Sorts data structures using data-structure-less-than"
+  (sort structures python-module-less-than))
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf4fbba8" class="outline-2">
+<h2 id="orgf4fbba8"><span class="todo TODO">TODO</span> Replace old lines with sorted lines</h2>
+<div class="outline-text-2" id="text-orgf4fbba8">
+</div><div id="outline-container-org8f96c6b" class="outline-3">
+<h3 id="org8f96c6b">Helpers</h3>
+<div class="outline-text-3" id="text-org8f96c6b">
+</div><div id="outline-container-org11c122e" class="outline-4">
+<h4 id="org11c122e">insert-python-import-statement</h4>
+<div class="outline-text-4" id="text-org11c122e">
+<p>
+Insert data structure string.
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp" id="org5ffc2ec">(defun insert-python-import-statement (ds)
+  "Inserts the string (car) of a data structure into current buffer"
+  (insert (car ds))
+  (newline))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2201cb1" class="outline-4">
+<h4 id="org2201cb1">insert-python-import-statements</h4>
+<div class="outline-text-4" id="text-org2201cb1">
+<p>
+Insert strings from all data structures. Uses <code>mapc</code> instead of <code>mapcar</code> because it is called for side-effects.
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp" id="org9fe5915">(defun insert-python-import-statements (structures)
+  "Inserts the ordered statements into current buffer."
+  (mapc insert-python-import-statement structures))
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5cafc73" class="outline-2">
+<h2 id="org5cafc73">Notes</h2>
+<div class="outline-text-2" id="text-org5cafc73">
+</div><div id="outline-container-orge5a05b5" class="outline-3">
+<h3 id="orge5a05b5">Emacs</h3>
+<div class="outline-text-3" id="text-orge5a05b5">
+<p>
+Some useful emacs commands including
+</p>
+<ol class="org-ol">
+<li><code>M-x keep-lines</code></li>
+<li><code>M-x flush-lines</code></li>
+</ol>
+<p>
+Some useful elisp:
+</p>
+<ol class="org-ol">
+<li><code>string-match</code> to 'compile' a regex against a string.</li>
+<li><code>match-string</code> to extract the groups of a match. These are used in the <code>parse-import-statement</code>.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org4744f86" class="outline-3">
+<h3 id="org4744f86">HTDP</h3>
+<div class="outline-text-3" id="text-org4744f86">
+<p>
+The template for writing code using the HTDP recipes is recursive. From the overall high level program down toward each function we have:
+</p>
+<ol class="org-ol">
+<li>Purpose</li>
+<li>Examples</li>
+<li>Template</li>
+<li>Tests (hopefully)</li>
+<li>Implementation (sometimes)</li>
+<li>Helpers</li>
+</ol>
+
+<p>
+In the literate programming model the template may be mostly a <code>noweb</code> construct. The helpers are there as a short circuit of the recursive structure.
+</p>
+<ul class="org-ul">
+<li><b>Implementation</b>
+Using unordered lists as the structure for HTDP elements makes their orginization constant regardless of the outline level within <code>org-mode</code>.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgce8bc50" class="outline-3">
+<h3 id="orgce8bc50"><span class="todo TODO">TODO</span> write elisp code to create an HTDP outline from the template.</h3>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: benrudgers</p>
+<p class="date">Created: 2017-04-28 Fri 16:21</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
