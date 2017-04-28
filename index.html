@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-04-27 Thu 17:55 -->
+<!-- 2017-04-28 Fri 15:30 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title></title>
@@ -232,63 +232,64 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org6749938">1. Overview</a>
+<li><a href="#org20e6631">1. Overview</a>
 <ul>
-<li><a href="#org84511de">1.1. Purpose</a></li>
-<li><a href="#org5dbf879">1.2. Examples</a></li>
-<li><a href="#org5b20ada">1.3. Template</a></li>
-<li><a href="#org079ae60">1.4. Outline</a></li>
+<li><a href="#org3b6ae58">1.1. Purpose</a></li>
+<li><a href="#org787e991">1.2. Examples</a></li>
+<li><a href="#org46c3503">1.3. Template</a></li>
+<li><a href="#org8f6a9e3">1.4. Outline</a></li>
 </ul>
 </li>
-<li><a href="#org5fbfc9a">2. Search Helpers</a>
+<li><a href="#orgdad1436">2. <span class="todo TODO">TODO</span> Edit Temp Buffer</a></li>
+<li><a href="#orgaa0612c">3. <span class="todo TODO">TODO</span> Edit Source Buffer</a></li>
+<li><a href="#orgaa94bd9">4. <span class="done DONE">DONE</span> Search Helpers</a>
 <ul>
-<li><a href="#org60b783c">2.1. import-match</a></li>
-<li><a href="#org342557c">2.2. buffer-flush-matching-lines</a></li>
-<li><a href="#org8f6b0ec">2.3. buffer-flush-not-matching-lines</a></li>
-<li><a href="#orga4c8e51">2.4. first-matching-line</a></li>
+<li><a href="#org9add2f9">4.1. import-match</a></li>
+<li><a href="#org3d15ba0">4.2. buffer-flush-matching-lines</a></li>
+<li><a href="#org7680b37">4.3. buffer-flush-not-matching-lines</a></li>
+<li><a href="#orge804418">4.4. first-matching-line</a></li>
 </ul>
 </li>
-<li><a href="#org898e8b8">3. Parse Helpers</a>
+<li><a href="#orgc2a5b90">5. <span class="todo TODO">TODO</span> Parse Helpers</a>
 <ul>
-<li><a href="#org37fc9b6">3.1. Story</a></li>
-<li><a href="#orgaace9d6">3.2. Purpose</a></li>
-<li><a href="#org6b28d56">3.3. Data Structure</a></li>
-<li><a href="#org65b1d7c">3.4. Examples</a></li>
-<li><a href="#org1f32fc3">3.5. Template</a></li>
-<li><a href="#orgb5b557d">3.6. Helpers</a>
+<li><a href="#orgca9e4f9">5.1. Purpose</a></li>
+<li><a href="#org9e8ef95">5.2. Data Structure</a></li>
+<li><a href="#org383d236">5.3. Examples</a></li>
+<li><a href="#orge030225">5.4. Template</a></li>
+<li><a href="#org9f4bd8f">5.5. Helpers</a>
 <ul>
-<li><a href="#orge8c1b64">3.6.1. <span class="todo TODO">TODO</span> provide flexibility in matching white space</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#org34efcdf">4. Sort Helpers</a>
-<ul>
-<li><a href="#org09af201">4.1. Data Structure</a></li>
-<li><a href="#org38b2e35">4.2. Template</a></li>
-<li><a href="#org1155e89">4.3. Helpers</a>
-<ul>
-<li><a href="#orgbc92c9b">4.3.1. python-module-less-than</a></li>
-<li><a href="#orgea5b791">4.3.2. sort-python-modules</a></li>
+<li><a href="#org8e7f2ac">5.5.1. <span class="todo TODO">TODO</span> provide flexibility in matching white space</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgd9a44ec">5. <span class="todo TODO">TODO</span> Replace old lines with sorted lines</a>
+<li><a href="#orgb78f263">6. <span class="todo TODO">TODO</span> Sort Helpers</a>
 <ul>
-<li><a href="#org7489fa5">5.1. Helpers</a>
+<li><a href="#orgcb671a1">6.1. Data Structure</a></li>
+<li><a href="#org2e8b8d2">6.2. Template</a></li>
+<li><a href="#orgd834c27">6.3. Helpers</a>
 <ul>
-<li><a href="#org3aeff51">5.1.1. insert-python-import-statement</a></li>
-<li><a href="#org1ec889f">5.1.2. insert-python-import-statements</a></li>
+<li><a href="#orgc861551">6.3.1. python-module-less-than</a></li>
+<li><a href="#orgd03d428">6.3.2. sort-python-modules</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orga892841">6. Notes</a>
+<li><a href="#org2cc3598">7. <span class="todo TODO">TODO</span> Replace old lines with sorted lines</a>
 <ul>
-<li><a href="#org66f6b37">6.1. Emacs</a></li>
-<li><a href="#org25b9d17">6.2. HTDP</a></li>
-<li><a href="#org7dfa6f3">6.3. <span class="todo TODO">TODO</span> write elisp code to create an HTDP outline from the template.</a></li>
+<li><a href="#org0218926">7.1. Helpers</a>
+<ul>
+<li><a href="#org2dcfea7">7.1.1. insert-python-import-statement</a></li>
+<li><a href="#org2d94ba4">7.1.2. insert-python-import-statements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgda3c64f">8. Notes</a>
+<ul>
+<li><a href="#org0f3abd1">8.1. Emacs</a></li>
+<li><a href="#org9d36956">8.2. HTDP</a></li>
+<li><a href="#org3215d59">8.3. <span class="todo TODO">TODO</span> write elisp code to create an HTDP outline from the template.</a></li>
 </ul>
 </li>
 </ul>
@@ -301,11 +302,11 @@ This program was inspired by <a href="https://news.ycombinator.com/item?id=14156
 <p>
 It also is an exploration in applying the <i>How to Design Programs</i> methodology within org-mode using literate programming. There are some rough edges because the code will run in Emacs' significantly stateful context.
 </p>
-<div id="outline-container-org6749938" class="outline-2">
-<h2 id="org6749938"><span class="section-number-2">1</span> Overview</h2>
+<div id="outline-container-org20e6631" class="outline-2">
+<h2 id="org20e6631"><span class="section-number-2">1</span> Overview</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-org84511de" class="outline-3">
-<h3 id="org84511de"><span class="section-number-3">1.1</span> Purpose</h3>
+</div><div id="outline-container-org3b6ae58" class="outline-3">
+<h3 id="org3b6ae58"><span class="section-number-3">1.1</span> Purpose</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 The script sorts a collection of Python <code>import</code> statements alphabetically using the specific name imported. It ignores the <code>from</code> prefix of the statement.
@@ -313,14 +314,14 @@ The script sorts a collection of Python <code>import</code> statements alphabeti
 </div>
 </div>
 
-<div id="outline-container-org5dbf879" class="outline-3">
-<h3 id="org5dbf879"><span class="section-number-3">1.2</span> Examples</h3>
+<div id="outline-container-org787e991" class="outline-3">
+<h3 id="org787e991"><span class="section-number-3">1.2</span> Examples</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Suppose we have the following Python Source 
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org4c58e80">import m
+<pre class="src src-python" id="org5b5ed76">import m
 import j
 from a import n
 from c import k
@@ -337,7 +338,7 @@ spam(3)
 Running the utility should modify the source to
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org8ead3cf">from b import i
+<pre class="src src-python" id="org62157fe">from b import i
 import j
 from c import k
 import m
@@ -352,8 +353,8 @@ spam(3)
 </div>
 </div>
 
-<div id="outline-container-org5b20ada" class="outline-3">
-<h3 id="org5b20ada"><span class="section-number-3">1.3</span> Template</h3>
+<div id="outline-container-org46c3503" class="outline-3">
+<h3 id="org46c3503"><span class="section-number-3">1.3</span> Template</h3>
 <div class="outline-text-3" id="text-1-3">
 <ol class="org-ol">
 <li>Find lines containing import statements</li>
@@ -362,7 +363,7 @@ spam(3)
 <li>Replace old lines with sorted lines</li>
 </ol>
 <div class="org-src-container">
-<pre class="src src-elisp" id="org61ae363">(defun python-import-sort ()
+<pre class="src src-elisp" id="org1871857">(defun python-import-sort ()
   (interactive)
   (fundamental-mode)
   (save-excursion
@@ -388,8 +389,8 @@ spam(3)
 </div>
 </div>
 </div>
-<div id="outline-container-org079ae60" class="outline-3">
-<h3 id="org079ae60"><span class="section-number-3">1.4</span> Outline</h3>
+<div id="outline-container-org8f6a9e3" class="outline-3">
+<h3 id="org8f6a9e3"><span class="section-number-3">1.4</span> Outline</h3>
 <div class="outline-text-3" id="text-1-4">
 <ol class="org-ol">
 <li>Replace existing import statements</li>
@@ -411,11 +412,17 @@ spam(3)
 </div>
 </div>
 </div>
-<div id="outline-container-org5fbfc9a" class="outline-2">
-<h2 id="org5fbfc9a"><span class="section-number-2">2</span> Search Helpers</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-orgdad1436" class="outline-2">
+<h2 id="orgdad1436"><span class="section-number-2">2</span> <span class="todo TODO">TODO</span> Edit Temp Buffer</h2>
+</div>
+<div id="outline-container-orgaa0612c" class="outline-2">
+<h2 id="orgaa0612c"><span class="section-number-2">3</span> <span class="todo TODO">TODO</span> Edit Source Buffer</h2>
+</div>
+<div id="outline-container-orgaa94bd9" class="outline-2">
+<h2 id="orgaa94bd9"><span class="section-number-2">4</span> <span class="done DONE">DONE</span> Search Helpers</h2>
+<div class="outline-text-2" id="text-4">
 <div class="org-src-container">
-<pre class="src src-elisp" id="org8b46f04">;;; Search Helpers
+<pre class="src src-elisp" id="orgaeb5a42">;;; Search Helpers
 
 &lt;&lt;import-match&gt;&gt;
 
@@ -427,21 +434,47 @@ spam(3)
 </pre>
 </div>
 </div>
-<div id="outline-container-org60b783c" class="outline-3">
-<h3 id="org60b783c"><span class="section-number-3">2.1</span> import-match</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-org9add2f9" class="outline-3">
+<h3 id="org9add2f9"><span class="section-number-3">4.1</span> import-match</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li><b>Purpose</b>
+A constant for matching import statements. Here the value is a simple string but it could be a <code>regexp</code>.</li>
+</ul>
 <div class="org-src-container">
-<pre class="src src-elisp" id="org0696a5d">;;; The match string for flushing and keeping
+<pre class="src src-elisp" id="org425e27e">;;; The match string for flushing and keeping
 (setq import-match "import")
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org342557c" class="outline-3">
-<h3 id="org342557c"><span class="section-number-3">2.2</span> buffer-flush-matching-lines</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-org3d15ba0" class="outline-3">
+<h3 id="org3d15ba0"><span class="section-number-3">4.2</span> buffer-flush-matching-lines</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li><b>Purpose</b>
+Purge/flush all lines from a buffer that match a <code>regexp</code>.</li>
+<li><p>
+<b>Example</b>
+</p>
+<pre class="example">
+Given a buffer containing.
+
+  # Using spam
+  import spam
+  spam.eggs(4)
+  print("eggs are tasty")
+  spam.spam('spam')
+
+Calling buffer-flush-matching-lines("eggs") yields
+
+  # a comment
+  import spam
+  spam.spam('spam')
+</pre></li>
+</ul>
 <div class="org-src-container">
-<pre class="src src-elisp" id="org60236e6">(defun buffer-flush-matching-lines (regex)
+<pre class="src src-elisp" id="org8161cd4">(defun buffer-flush-matching-lines (regex)
   "Flushes matching lines from buffer."
   (mark-whole-buffer)
   (flush-lines regex))
@@ -449,11 +482,32 @@ spam(3)
 </div>
 </div>
 </div>
-<div id="outline-container-org8f6b0ec" class="outline-3">
-<h3 id="org8f6b0ec"><span class="section-number-3">2.3</span> buffer-flush-not-matching-lines</h3>
-<div class="outline-text-3" id="text-2-3">
+<div id="outline-container-org7680b37" class="outline-3">
+<h3 id="org7680b37"><span class="section-number-3">4.3</span> buffer-flush-not-matching-lines</h3>
+<div class="outline-text-3" id="text-4-3">
+<ul class="org-ul">
+<li><b>Purpose</b>
+Purge/flush all lines from a buffer that do not match a <code>regexp</code>.</li>
+<li><p>
+<b>Example</b>
+</p>
+<pre class="example">
+Given a buffer containing.
+
+  # Using spam
+  import spam
+  spam.eggs(4)
+  print("eggs are tasty")
+  spam.spam('spam')
+
+Calling buffer-flush-not-matching-lines("eggs") yields
+
+  spam.eggs(4)
+  print("eggs are tasty")
+</pre></li>
+</ul>
 <div class="org-src-container">
-<pre class="src src-elisp" id="orge9a4a93">(defun buffer-flush-not-matching-lines (regex)
+<pre class="src src-elisp" id="org7a52548">(defun buffer-flush-not-matching-lines (regex)
   "Removes non-matching lines from buffer."
     (mark-whole-buffer)
     (keep-lines regex))
@@ -461,11 +515,31 @@ spam(3)
 </div>
 </div>
 </div>
-<div id="outline-container-orga4c8e51" class="outline-3">
-<h3 id="orga4c8e51"><span class="section-number-3">2.4</span> first-matching-line</h3>
-<div class="outline-text-3" id="text-2-4">
+<div id="outline-container-orge804418" class="outline-3">
+<h3 id="orge804418"><span class="section-number-3">4.4</span> first-matching-line</h3>
+<div class="outline-text-3" id="text-4-4">
+<ul class="org-ul">
+<li><b>Purpose</b>
+Plase point at start of first line in buffer that contains match for <code>regexp</code></li>
+<li><p>
+<b>Example</b>
+</p>
+<pre class="example">
+Given a buffer containing.
+
+  # Using spam
+  import spam
+  spam.eggs(4)
+  print("eggs are tasty")
+  spam.spam('spam')
+
+Calling first-matching-line("eggs") moves the point to the beginning of
+
+  spam.eggs(4)
+</pre></li>
+</ul>
 <div class="org-src-container">
-<pre class="src src-elisp" id="orgb7146c3">(defun first-matching-line (regex)
+<pre class="src src-elisp" id="org552146f">(defun first-matching-line (regex)
   "Finds the start of line for the first line matching regex."
   (beginning-of-buffer)
   (search-forward regex)
@@ -475,13 +549,11 @@ spam(3)
 </div>
 </div>
 </div>
-<div id="outline-container-org898e8b8" class="outline-2">
-<h2 id="org898e8b8"><span class="section-number-2">3</span> Parse Helpers</h2>
-<div class="outline-text-2" id="text-3">
-</div><div id="outline-container-org37fc9b6" class="outline-3">
-<h3 id="org37fc9b6"><span class="section-number-3">3.1</span> Story</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-orgc2a5b90" class="outline-2">
+<h2 id="orgc2a5b90"><span class="section-number-2">5</span> <span class="todo TODO">TODO</span> Parse Helpers</h2>
+<div class="outline-text-2" id="text-5">
 <p>
+ Story
 I spent a couple of hours (much longer than I expected) goofing around with elisp and regexp's to figure out a way to make string matching work. I am sure there is a simpler way.
 </p>
 
@@ -489,18 +561,17 @@ I spent a couple of hours (much longer than I expected) goofing around with elis
 The helper function <code>parse-import-statement</code> contains the final regex.
 </p>
 </div>
-</div>
-<div id="outline-container-orgaace9d6" class="outline-3">
-<h3 id="orgaace9d6"><span class="section-number-3">3.2</span> Purpose</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-orgca9e4f9" class="outline-3">
+<h3 id="orgca9e4f9"><span class="section-number-3">5.1</span> Purpose</h3>
+<div class="outline-text-3" id="text-5-1">
 <p>
 To create a data structure upon which the lines can be sorted.
 </p>
 </div>
 </div>
-<div id="outline-container-org6b28d56" class="outline-3">
-<h3 id="org6b28d56"><span class="section-number-3">3.3</span> Data Structure</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-org9e8ef95" class="outline-3">
+<h3 id="org9e8ef95"><span class="section-number-3">5.2</span> Data Structure</h3>
+<div class="outline-text-3" id="text-5-2">
 <p>
 The data structure is a dotted list. The first element is the original line and the second element is the name of what is actually imported.
 </p>
@@ -509,9 +580,9 @@ The data structure is a dotted list. The first element is the original line and 
 </pre>
 </div>
 </div>
-<div id="outline-container-org65b1d7c" class="outline-3">
-<h3 id="org65b1d7c"><span class="section-number-3">3.4</span> Examples</h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-org383d236" class="outline-3">
+<h3 id="org383d236"><span class="section-number-3">5.3</span> Examples</h3>
+<div class="outline-text-3" id="text-5-3">
 <pre class="example">
 (parse-import-statements
   '("import m"
@@ -528,11 +599,11 @@ The data structure is a dotted list. The first element is the original line and 
 </pre>
 </div>
 </div>
-<div id="outline-container-org1f32fc3" class="outline-3">
-<h3 id="org1f32fc3"><span class="section-number-3">3.5</span> Template</h3>
-<div class="outline-text-3" id="text-3-5">
+<div id="outline-container-orge030225" class="outline-3">
+<h3 id="orge030225"><span class="section-number-3">5.4</span> Template</h3>
+<div class="outline-text-3" id="text-5-4">
 <div class="org-src-container">
-<pre class="src src-elisp" id="org637f4e3">;;; Parse Helpers
+<pre class="src src-elisp" id="orgf73c1dd">;;; Parse Helpers
 
 &lt;&lt;parse-import-statement&gt;&gt;
 
@@ -541,14 +612,14 @@ The data structure is a dotted list. The first element is the original line and 
 </div>
 </div>
 </div>
-<div id="outline-container-orgb5b557d" class="outline-3">
-<h3 id="orgb5b557d"><span class="section-number-3">3.6</span> Helpers</h3>
-<div class="outline-text-3" id="text-3-6">
+<div id="outline-container-org9f4bd8f" class="outline-3">
+<h3 id="org9f4bd8f"><span class="section-number-3">5.5</span> Helpers</h3>
+<div class="outline-text-3" id="text-5-5">
 <p>
 The high level parsing function:
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp" id="org92d2ef3">(defun parse-import-statements (statements &amp;optional a-list)
+<pre class="src src-elisp" id="org9c8ea94">(defun parse-import-statements (statements &amp;optional a-list)
   "Parses each statement in statements. Returns a list of (statement . sort-term)."
   (if (null statements)
       a-list
@@ -562,7 +633,7 @@ The high level parsing function:
 Parse one import statement
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp" id="orgb7e6a04">(defun parse-import-statement (line)
+<pre class="src src-elisp" id="org3292d85">(defun parse-import-statement (line)
   "Takes a Python import statement as a string.
 Returns a dotted list of: (import-statement . sort-term)."
   (let* ((matcher "\\(\\w+ import \\|import \\)\\(\\w\\)")
@@ -571,9 +642,9 @@ Returns a dotted list of: (import-statement . sort-term)."
 </pre>
 </div>
 </div>
-<div id="outline-container-orge8c1b64" class="outline-4">
-<h4 id="orge8c1b64"><span class="section-number-4">3.6.1</span> <span class="todo TODO">TODO</span> provide flexibility in matching white space</h4>
-<div class="outline-text-4" id="text-3-6-1">
+<div id="outline-container-org8e7f2ac" class="outline-4">
+<h4 id="org8e7f2ac"><span class="section-number-4">5.5.1</span> <span class="todo TODO">TODO</span> provide flexibility in matching white space</h4>
+<div class="outline-text-4" id="text-5-5-1">
 <p>
 Currently, only a single space between <code>import</code> and the name is matched.
 </p>
@@ -581,12 +652,12 @@ Currently, only a single space between <code>import</code> and the name is match
 </div>
 </div>
 </div>
-<div id="outline-container-org34efcdf" class="outline-2">
-<h2 id="org34efcdf"><span class="section-number-2">4</span> Sort Helpers</h2>
-<div class="outline-text-2" id="text-4">
-</div><div id="outline-container-org09af201" class="outline-3">
-<h3 id="org09af201"><span class="section-number-3">4.1</span> Data Structure</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-orgb78f263" class="outline-2">
+<h2 id="orgb78f263"><span class="section-number-2">6</span> <span class="todo TODO">TODO</span> Sort Helpers</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-orgcb671a1" class="outline-3">
+<h3 id="orgcb671a1"><span class="section-number-3">6.1</span> Data Structure</h3>
+<div class="outline-text-3" id="text-6-1">
 <p>
 The data structure is a dotted list. The first element is the original line and the second element is the name of the python module to be imported.
 </p>
@@ -595,11 +666,11 @@ The data structure is a dotted list. The first element is the original line and 
 </pre>
 </div>
 </div>
-<div id="outline-container-org38b2e35" class="outline-3">
-<h3 id="org38b2e35"><span class="section-number-3">4.2</span> Template</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-org2e8b8d2" class="outline-3">
+<h3 id="org2e8b8d2"><span class="section-number-3">6.2</span> Template</h3>
+<div class="outline-text-3" id="text-6-2">
 <div class="org-src-container">
-<pre class="src src-elisp" id="org31aea96">;;; sort lines based on name of import
+<pre class="src src-elisp" id="org5e0d3f2">;;; sort lines based on name of import
 
 &lt;&lt;python-module-less-than&gt;&gt;
 
@@ -608,17 +679,17 @@ The data structure is a dotted list. The first element is the original line and 
 </div>
 </div>
 </div>
-<div id="outline-container-org1155e89" class="outline-3">
-<h3 id="org1155e89"><span class="section-number-3">4.3</span> Helpers</h3>
-<div class="outline-text-3" id="text-4-3">
-</div><div id="outline-container-orgbc92c9b" class="outline-4">
-<h4 id="orgbc92c9b"><span class="section-number-4">4.3.1</span> python-module-less-than</h4>
-<div class="outline-text-4" id="text-4-3-1">
+<div id="outline-container-orgd834c27" class="outline-3">
+<h3 id="orgd834c27"><span class="section-number-3">6.3</span> Helpers</h3>
+<div class="outline-text-3" id="text-6-3">
+</div><div id="outline-container-orgc861551" class="outline-4">
+<h4 id="orgc861551"><span class="section-number-4">6.3.1</span> python-module-less-than</h4>
+<div class="outline-text-4" id="text-6-3-1">
 <p>
 Compare two data structures based on second element which is the name of the python module.
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp" id="orgf1e8f0d">;;; sorting helper
+<pre class="src src-elisp" id="org78ab1ed">;;; sorting helper
 (defun python-module-less-than (lhs rhs)
   "Returns true if the module name of the left hand side is less than the module name of the right hand side."
   (string&lt; (second lhs) (second rhs)))
@@ -626,14 +697,14 @@ Compare two data structures based on second element which is the name of the pyt
 </div>
 </div>
 </div>
-<div id="outline-container-orgea5b791" class="outline-4">
-<h4 id="orgea5b791"><span class="section-number-4">4.3.2</span> sort-python-modules</h4>
-<div class="outline-text-4" id="text-4-3-2">
+<div id="outline-container-orgd03d428" class="outline-4">
+<h4 id="orgd03d428"><span class="section-number-4">6.3.2</span> sort-python-modules</h4>
+<div class="outline-text-4" id="text-6-3-2">
 <p>
 Sort data structures based on second element which is the name of the module.
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp" id="org9482d17">;;; sorting helper
+<pre class="src src-elisp" id="org85f1bb4">;;; sorting helper
 (defun sort-python-modules (structures)
   "Sorts data structures using data-structure-less-than"
   (sort structures python-module-less-than))
@@ -643,20 +714,20 @@ Sort data structures based on second element which is the name of the module.
 </div>
 </div>
 </div>
-<div id="outline-container-orgd9a44ec" class="outline-2">
-<h2 id="orgd9a44ec"><span class="section-number-2">5</span> <span class="todo TODO">TODO</span> Replace old lines with sorted lines</h2>
-<div class="outline-text-2" id="text-5">
-</div><div id="outline-container-org7489fa5" class="outline-3">
-<h3 id="org7489fa5"><span class="section-number-3">5.1</span> Helpers</h3>
-<div class="outline-text-3" id="text-5-1">
-</div><div id="outline-container-org3aeff51" class="outline-4">
-<h4 id="org3aeff51"><span class="section-number-4">5.1.1</span> insert-python-import-statement</h4>
-<div class="outline-text-4" id="text-5-1-1">
+<div id="outline-container-org2cc3598" class="outline-2">
+<h2 id="org2cc3598"><span class="section-number-2">7</span> <span class="todo TODO">TODO</span> Replace old lines with sorted lines</h2>
+<div class="outline-text-2" id="text-7">
+</div><div id="outline-container-org0218926" class="outline-3">
+<h3 id="org0218926"><span class="section-number-3">7.1</span> Helpers</h3>
+<div class="outline-text-3" id="text-7-1">
+</div><div id="outline-container-org2dcfea7" class="outline-4">
+<h4 id="org2dcfea7"><span class="section-number-4">7.1.1</span> insert-python-import-statement</h4>
+<div class="outline-text-4" id="text-7-1-1">
 <p>
 Insert data structure string.
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp" id="org70aec00">(defun insert-python-import-statement (ds)
+<pre class="src src-elisp" id="orgcf67dff">(defun insert-python-import-statement (ds)
   "Inserts the string (car) of a data structure into current buffer"
   (insert (car ds))
   (newline))
@@ -664,14 +735,14 @@ Insert data structure string.
 </div>
 </div>
 </div>
-<div id="outline-container-org1ec889f" class="outline-4">
-<h4 id="org1ec889f"><span class="section-number-4">5.1.2</span> insert-python-import-statements</h4>
-<div class="outline-text-4" id="text-5-1-2">
+<div id="outline-container-org2d94ba4" class="outline-4">
+<h4 id="org2d94ba4"><span class="section-number-4">7.1.2</span> insert-python-import-statements</h4>
+<div class="outline-text-4" id="text-7-1-2">
 <p>
 Insert strings from all data structures. Uses <code>mapc</code> instead of <code>mapcar</code> because it is called for side-effects.
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp" id="orgfc1c499">(defun insert-python-import-statements (structures)
+<pre class="src src-elisp" id="orga8b9ddd">(defun insert-python-import-statements (structures)
   "Inserts the ordered statements into current buffer."
   (mapc insert-python-import-statement structures))
 </pre>
@@ -681,12 +752,12 @@ Insert strings from all data structures. Uses <code>mapc</code> instead of <code
 </div>
 </div>
 
-<div id="outline-container-orga892841" class="outline-2">
-<h2 id="orga892841"><span class="section-number-2">6</span> Notes</h2>
-<div class="outline-text-2" id="text-6">
-</div><div id="outline-container-org66f6b37" class="outline-3">
-<h3 id="org66f6b37"><span class="section-number-3">6.1</span> Emacs</h3>
-<div class="outline-text-3" id="text-6-1">
+<div id="outline-container-orgda3c64f" class="outline-2">
+<h2 id="orgda3c64f"><span class="section-number-2">8</span> Notes</h2>
+<div class="outline-text-2" id="text-8">
+</div><div id="outline-container-org0f3abd1" class="outline-3">
+<h3 id="org0f3abd1"><span class="section-number-3">8.1</span> Emacs</h3>
+<div class="outline-text-3" id="text-8-1">
 <p>
 Some useful emacs commands including
 </p>
@@ -703,9 +774,9 @@ Some useful elisp:
 </ol>
 </div>
 </div>
-<div id="outline-container-org25b9d17" class="outline-3">
-<h3 id="org25b9d17"><span class="section-number-3">6.2</span> HTDP</h3>
-<div class="outline-text-3" id="text-6-2">
+<div id="outline-container-org9d36956" class="outline-3">
+<h3 id="org9d36956"><span class="section-number-3">8.2</span> HTDP</h3>
+<div class="outline-text-3" id="text-8-2">
 <p>
 The template for writing code using the HTDP recipes is recursive. From the overall high level program down toward each function we have:
 </p>
@@ -723,14 +794,14 @@ In the literate programming model the template may be mostly a <code>noweb</code
 </p>
 </div>
 </div>
-<div id="outline-container-org7dfa6f3" class="outline-3">
-<h3 id="org7dfa6f3"><span class="section-number-3">6.3</span> <span class="todo TODO">TODO</span> write elisp code to create an HTDP outline from the template.</h3>
+<div id="outline-container-org3215d59" class="outline-3">
+<h3 id="org3215d59"><span class="section-number-3">8.3</span> <span class="todo TODO">TODO</span> write elisp code to create an HTDP outline from the template.</h3>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: benrudgers</p>
-<p class="date">Created: 2017-04-27 Thu 17:55</p>
+<p class="date">Created: 2017-04-28 Fri 15:30</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -78,7 +78,9 @@ It also is an exploration in applying the /How to Design Programs/ methodology w
     )) ; end let end excursion
   (normal-mode)
 #+END_SRC
-* Search Helpers
+* TODO Edit Temp Buffer
+* TODO Edit Source Buffer
+* DONE Search Helpers
 #+NAME: search-helpers
 #+BEGIN_SRC elisp :noweb-tangle
   ;;; Search Helpers
@@ -92,12 +94,32 @@ It also is an exploration in applying the /How to Design Programs/ methodology w
   <<first-matching-line>>
 #+END_SRC
 ** import-match 
+  + *Purpose*
+    A constant for matching import statements. Here the value is a simple string but it could be a =regexp=.
 #+NAME: import-match
 #+BEGIN_SRC elisp
   ;;; The match string for flushing and keeping
   (setq import-match "import")
 #+END_SRC
 ** buffer-flush-matching-lines
+  + *Purpose*
+    Purge/flush all lines from a buffer that match a =regexp=.
+  + *Example*
+    #+BEGIN_EXAMPLE
+      Given a buffer containing.
+
+        # Using spam
+        import spam
+        spam.eggs(4)
+        print("eggs are tasty")
+        spam.spam('spam')
+
+      Calling buffer-flush-matching-lines("eggs") yields
+
+        # a comment
+        import spam
+        spam.spam('spam')
+#+END_EXAMPLE
 #+NAME: buffer-flush-matching-lines
 #+BEGIN_SRC elisp
   (defun buffer-flush-matching-lines (regex)
@@ -106,6 +128,23 @@ It also is an exploration in applying the /How to Design Programs/ methodology w
     (flush-lines regex))
 #+END_SRC
 ** buffer-flush-not-matching-lines
+  + *Purpose*
+    Purge/flush all lines from a buffer that do not match a =regexp=.
+  + *Example*
+    #+BEGIN_EXAMPLE
+      Given a buffer containing.
+
+        # Using spam
+        import spam
+        spam.eggs(4)
+        print("eggs are tasty")
+        spam.spam('spam')
+
+      Calling buffer-flush-not-matching-lines("eggs") yields
+
+        spam.eggs(4)
+        print("eggs are tasty")
+#+END_EXAMPLE
 #+NAME: buffer-flush-not-matching-lines
 #+BEGIN_SRC elisp
   (defun buffer-flush-not-matching-lines (regex)
@@ -114,6 +153,23 @@ It also is an exploration in applying the /How to Design Programs/ methodology w
       (keep-lines regex))
 #+END_SRC
 ** first-matching-line
+  + *Purpose*
+    Plase point at start of first line in buffer that contains match for =regexp=
+  + *Example*
+    #+BEGIN_EXAMPLE
+      Given a buffer containing.
+
+        # Using spam
+        import spam
+        spam.eggs(4)
+        print("eggs are tasty")
+        spam.spam('spam')
+
+      Calling first-matching-line("eggs") moves the point to the beginning of
+
+        spam.eggs(4)
+
+    #+END_EXAMPLE
 #+NAME: first-matching-line
 #+BEGIN_SRC elisp
   (defun first-matching-line (regex)
@@ -122,8 +178,8 @@ It also is an exploration in applying the /How to Design Programs/ methodology w
     (search-forward regex)
     (move-beginning-of-line nil))
 #+END_SRC
-* Parse Helpers
-** Story
+* TODO Parse Helpers
+ Story
 I spent a couple of hours (much longer than I expected) goofing around with elisp and regexp's to figure out a way to make string matching work. I am sure there is a simpler way.
 
 The helper function =parse-import-statement= contains the final regex.
@@ -183,7 +239,7 @@ Parse one import statement
 #+END_SRC
 *** TODO provide flexibility in matching white space
 Currently, only a single space between =import= and the name is matched.
-* Sort Helpers
+* TODO Sort Helpers
 ** Data Structure
 The data structure is a dotted list. The first element is the original line and the second element is the name of the python module to be imported.
 #+BEGIN_EXAMPLE
