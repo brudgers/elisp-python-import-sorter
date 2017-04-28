@@ -317,4 +317,6 @@ The template for writing code using the HTDP recipes is recursive. From the over
 6. Helpers
 
 In the literate programming model the template may be mostly a =noweb= construct. The helpers are there as a short circuit of the recursive structure.
+  + *Implementation*
+    Using unordered lists as the structure for HTDP elements makes their orginization constant regardless of the outline level within =org-mode=.
 ** TODO write elisp code to create an HTDP outline from the template.
