@@ -3,7 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<<<<<<< HEAD
 <!-- 2017-04-28 Fri 15:46 -->
+=======
+<!-- 2017-04-27 Thu 17:22 -->
+>>>>>>> master
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title></title>
@@ -228,6 +232,7 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
+<<<<<<< HEAD
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
@@ -364,6 +369,10 @@ spam(3)
 </ol>
 <div class="org-src-container">
 <pre class="src src-elisp" id="org6895fb0">(defun python-import-sort ()
+=======
+<p>
+(defun python-import-sort ()
+>>>>>>> master
   (interactive)
   (fundamental-mode)
   (save-excursion
@@ -372,6 +381,7 @@ spam(3)
           (whole-buffer (buffer-string)))
       (with-temp-buffer
         (fundamental-mode)
+<<<<<<< HEAD
         &lt;&lt;edit-temp-buffer&gt;&gt;
         (setq whole-buffer (buffer string))); end with-temp-buffer
       &lt;&lt;edit-source-buffer&gt;&gt;)))
@@ -570,11 +580,21 @@ Calling first-matching-line("eggs") moves the point to the beginning of
 <p>
  Story
 I spent a couple of hours (much longer than I expected) goofing around with elisp and regexp's to figure out a way to make string matching work. I am sure there is a simpler way.
+=======
+        <a id="orgab373ad"></a>
+        (setq whole-buffer (buffer string))); end with-temp-buffer
+      <a id="org515664f"></a>)))
 </p>
 
 <p>
-The helper function <code>parse-import-statement</code> contains the final regex.
+;;; Helpers
+>>>>>>> master
 </p>
+
+<p>
+<a id="org43b96dd"></a>
+</p>
+<<<<<<< HEAD
 </div>
 <div id="outline-container-orgb08fdcc" class="outline-3">
 <h3 id="orgb08fdcc">Purpose</h3>
@@ -673,9 +693,13 @@ Currently, only a single space between <code>import</code> and the name is match
 </div><div id="outline-container-org94e0b50" class="outline-3">
 <h3 id="org94e0b50">Data Structure</h3>
 <div class="outline-text-3" id="text-org94e0b50">
+=======
+
+>>>>>>> master
 <p>
-The data structure is a dotted list. The first element is the original line and the second element is the name of the python module to be imported.
+<a id="org9af12e3"></a>
 </p>
+<<<<<<< HEAD
 <pre class="example">
 ("from a import n" . "n")
 </pre>
@@ -700,9 +724,13 @@ The data structure is a dotted list. The first element is the original line and 
 </div><div id="outline-container-orgfc3c7e1" class="outline-4">
 <h4 id="orgfc3c7e1">python-module-less-than</h4>
 <div class="outline-text-4" id="text-orgfc3c7e1">
+=======
+
+>>>>>>> master
 <p>
-Compare two data structures based on second element which is the name of the python module.
+<a id="orgb416cd9"></a>
 </p>
+<<<<<<< HEAD
 <div class="org-src-container">
 <pre class="src src-elisp" id="orge47562d">;;; sorting helper
 (defun python-module-less-than (lhs rhs)
@@ -803,11 +831,14 @@ The template for writing code using the HTDP recipes is recursive. From the over
 <li>Implementation (sometimes)</li>
 <li>Helpers</li>
 </ol>
+=======
+>>>>>>> master
 
 <p>
-In the literate programming model the template may be mostly a <code>noweb</code> construct. The helpers are there as a short circuit of the recursive structure.
+<a id="orgc3bbdf1"></a>
 </p>
 </div>
+<<<<<<< HEAD
 </div>
 <div id="outline-container-org6a6afd2" class="outline-3">
 <h3 id="org6a6afd2"><span class="todo TODO">TODO</span> write elisp code to create an HTDP outline from the template.</h3>
@@ -817,6 +848,11 @@ In the literate programming model the template may be mostly a <code>noweb</code
 <div id="postamble" class="status">
 <p class="author">Author: benrudgers</p>
 <p class="date">Created: 2017-04-28 Fri 15:46</p>
+=======
+<div id="postamble" class="status">
+<p class="author">Author: benrudgers</p>
+<p class="date">Created: 2017-04-27 Thu 17:22</p>
+>>>>>>> master
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

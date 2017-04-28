@@ -67,25 +67,13 @@ It also is an exploration in applying the /How to Design Programs/ methodology w
 
    <<replace-helpers>>
  #+END_SRC
-** Outline
-7. Replace existing import statements
-#+BEGIN_SRC elisp
-  ;; delete the matching lines from original buffer
-  (buffer-flush-matching-lines import-match)
-  (insert whole-buffer)
-#+END_SRC
-8. End excursion
-#+BEGIN_SRC elisp
-    )) ; end let end excursion
-  (normal-mode)
-#+END_SRC
 * TODO Edit Temp Buffer
 * TODO Edit Source Buffer
 * DONE Search Helpers
 A collection of functions to facillitate searching a buffer and operating upon the buffer based on search.
 #+NAME: search-helpers
 #+BEGIN_SRC elisp :noweb-tangle
-  ;;; Search Helpers
+  ;;; Search Helper
 
   <<import-match>>
 
