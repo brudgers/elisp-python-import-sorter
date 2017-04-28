@@ -1,22 +1,19 @@
-(defun parse-import-statement (line)
-  "Takes a Python import statement as a string.
-Returns a dotted list of: (import-statement . sort-term)."
-  (let* ((matcher "\\(\\w+ import \\|import \\)\\(\\w\\)")
-         (match (string-match matcher line)))
-    (cons line (match-string 2 line))))
+(defun python-import-sort ()
+  (interactive)
+  (fundamental-mode)
+  (save-excursion
+    (first-matching-line import-match)
+    (let ((place-to-insert (point-marker))
+          (whole-buffer (buffer-string)))
+      (with-temp-buffer
+        (fundamental-mode)
+        
+        (setq whole-buffer (buffer string))); end with-temp-buffer
+      )))
 
-(defun parse-import-statements (statements &optional a-list)
-  "Parses each statement in statements. Returns a list of (statement . sort-term)."
-  (if (null statements)
-      a-list
-    (parse-import-statements
-     (rest statements)
-     (cons (parse-import-statement (first statements))
-           a-list))))
+;;; Helpers
 
-<sort-import-statements-by-name>>
-
-;;; Copy Python Buffer
+;;; Search Helpers
 
 ;;; The match string for flushing and keeping
 (setq import-match "import")
@@ -37,28 +34,23 @@ Returns a dotted list of: (import-statement . sort-term)."
   (search-forward regex)
   (move-beginning-of-line nil))
 
-;; use fundamental mode to avoid capturing fontlock information
-;; when calling buffer-string
-(fundamental-mode)
-(save-excursion
-  (first-matching-line import-match)
-  (let ((place-to-insert (point-marker))
-        (whole-buffer (buffer-string)))
-    ;; delete the matching lines from original buffer
-    (buffer-flush-matching-lines import-match)
-    (insert
-     (with-temp-buffer
-              (fundamental-mode)
-              (insert whole-buffer)
-              (buffer-flush-not-matching-lines import-match)
-              (let
-                  ((statements (parse-import-statements (mark-whole-buffer))))
-                
-                
-              ))) ; end insert
-    ))
-;; restore default mode for file extension
-(normal-mode)
+;;; Parse Helpers
+
+(defun parse-import-statement (line)
+  "Takes a Python import statement as a string.
+Returns a dotted list of: (import-statement . sort-term)."
+  (let* ((matcher "\\(\\w+ import \\|import \\)\\(\\w\\)")
+         (match (string-match matcher line)))
+    (cons line (match-string 2 line))))
+
+(defun parse-import-statements (statements &optional a-list)
+  "Parses each statement in statements. Returns a list of (statement . sort-term)."
+  (if (null statements)
+      a-list
+    (parse-import-statements
+     (rest statements)
+     (cons (parse-import-statement (first statements))
+           a-list))))
 
 ;;; sort lines based on name of import
 
