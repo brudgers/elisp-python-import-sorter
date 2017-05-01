@@ -1,16 +1,3 @@
-(defun python-import-sort ()
-  (interactive)
-  (fundamental-mode)
-  (save-excursion
-    (first-matching-line import-match)
-    (let ((place-to-insert (point-marker))
-          (whole-buffer (buffer-string)))
-      (with-temp-buffer
-        (fundamental-mode)
-        
-        (setq whole-buffer (buffer string))); end with-temp-buffer
-      )))
-
 ;;; Helpers
 
 ;;; Search Helper
@@ -36,6 +23,10 @@
 
 ;;; Parse Helpers
 
+(defun buffer-to-list ()
+  "Converts a buffer to a list of lines."
+  (split-string (buffer-string) "\n" t))
+
 (defun parse-import-statement (line)
   "Takes a Python import statement as a string.
 Returns a dotted list of: (import-statement . sort-term)."
@@ -52,7 +43,8 @@ Returns a dotted list of: (import-statement . sort-term)."
      (cons (parse-import-statement (first statements))
            a-list))))
 
-;;; sort lines based on name of import
+
+;;; sort helpers
 
 ;;; sorting helper
 (defun python-module-less-than (lhs rhs)
@@ -63,3 +55,38 @@ Returns a dotted list of: (import-statement . sort-term)."
 (defun sort-python-modules (structures)
   "Sorts data structures using data-structure-less-than"
   (sort structures python-module-less-than))
+
+
+;; replace helpers
+
+(defun insert-python-import-statement (ds)
+  "Inserts the string (car) of a data structure into current buffer"
+  (insert (car ds))
+  (newline))
+
+(defun insert-python-import-statements (structures)
+  "Inserts the ordered statements into current buffer."
+  (mapc insert-python-import-statement structures))
+
+
+;;; Main
+
+(defun python-import-sort ()
+  (interactive)
+  (fundamental-mode)
+  (save-excursion
+    (first-matching-line import-match)
+    (let ((place-to-insert (point-marker))
+          (whole-buffer (buffer-string)))
+      (with-temp-buffer
+        (fundamental-mode)
+        (insert whole-buffer)
+        (buffer-flush-not-matching-lines import-match)
+        (let* ((modules (parse-import-statements (buffer-to-list)))
+               (sorted-modules (sort-python-modules modules)))
+          (flush-lines "")
+          (insert-python-import-statements sorted-modules))
+        (setq whole-buffer (buffer-string))); end with-temp-buffer
+      (buffer-flush-matching-lines import-match)
+      (goto-char place-to-insert)
+      (insert whole-buffer))))

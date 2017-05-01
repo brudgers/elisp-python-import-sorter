@@ -44,6 +44,18 @@ It also is an exploration in applying the /How to Design Programs/ methodology w
  4. Replace old lines with sorted lines
  #+NAME: main
  #+BEGIN_SRC elisp :noweb tangle :tangle python-import-sort.el
+   ;;; Helpers
+
+   <<search-helpers>>
+
+   <<parse-helpers>>
+
+   <<sort-helpers>>
+
+   <<replace-helpers>>
+
+   ;;; Main
+
    (defun python-import-sort ()
      (interactive)
      (fundamental-mode)
@@ -54,21 +66,22 @@ It also is an exploration in applying the /How to Design Programs/ methodology w
          (with-temp-buffer
            (fundamental-mode)
            <<edit-temp-buffer>>
-           (setq whole-buffer (buffer string))); end with-temp-buffer
-         <<edit-source-buffer>>)))
+           (setq whole-buffer (buffer-string))); end with-temp-buffer
+         (buffer-flush-matching-lines import-match)
+         (goto-char place-to-insert)
+         (insert whole-buffer))))
 
-   ;;; Helpers
-
-   <<search-helpers>>
-
-   <<parse-helpers>>
-
-   <<sort-helpers>>
-
-   <<replace-helpers>>
  #+END_SRC
 * TODO Edit Temp Buffer
-* TODO Edit Source Buffer
+#+NAME: edit-temp-buffer
+#+BEGIN_SRC elisp
+  (insert whole-buffer)
+  (buffer-flush-not-matching-lines import-match)
+  (let* ((modules (parse-import-statements (buffer-to-list)))
+         (sorted-modules (sort-python-modules modules)))
+    (flush-lines "")
+    (insert-python-import-statements sorted-modules))
+#+END_SRC
 * DONE Search Helpers
 A collection of functions to facillitate searching a buffer and operating upon the buffer based on search.
 #+NAME: search-helpers
@@ -172,7 +185,7 @@ A collection of functions to facillitate searching a buffer and operating upon t
         (search-forward regex)
         (move-beginning-of-line nil))
 #+END_SRC
-* TODO Parse Helpers
+* DONE Parse Helpers
  Story
 I spent a couple of hours (much longer than I expected) goofing around with elisp and regexp's to figure out a way to make string matching work. I am sure there is a simpler way.
 
@@ -204,11 +217,21 @@ The data structure is a dotted list. The first element is the original line and 
 #+BEGIN_SRC elisp :noweb tangle
   ;;; Parse Helpers
 
+  <<buffer-to-list>>
+
   <<parse-import-statement>>
 
   <<parse-import-statements>>
+
 #+END_SRC
 ** Helpers
+Convert a buffer to a list of strings based on lines:
+#+NAME: buffer-to-list
+#+BEGIN_SRC elisp
+  (defun buffer-to-list ()
+    "Converts a buffer to a list of lines."
+    (split-string (buffer-string) "\n" t))
+#+END_SRC
 The high level parsing function:
 #+NAME: parse-import-statements
 #+BEGIN_SRC elisp
@@ -240,16 +263,16 @@ The data structure is a dotted list. The first element is the original line and 
 ("from a import n" . "n")
 #+END_EXAMPLE
 ** Template
-#+NAME: sort-lines-based-on-name-of-import
-#+BEGIN_SRC elisp :noweb tangle :tangle yes
-  ;;; sort lines based on name of import
+#+NAME: sort-helpers
+#+BEGIN_SRC elisp :noweb tangle
+  ;;; sort helpers
 
   <<python-module-less-than>>
 
   <<sort-python-modules>>
+
 #+END_SRC
 ** Helpers
-*** python-module-less-than
 Compare two data structures based on second element which is the name of the python module.
 #+NAME: python-module-less-than
 #+BEGIN_SRC elisp
@@ -258,7 +281,6 @@ Compare two data structures based on second element which is the name of the pyt
     "Returns true if the module name of the left hand side is less than the module name of the right hand side."
     (string< (second lhs) (second rhs)))
 #+END_SRC
-*** sort-python-modules
 Sort data structures based on second element which is the name of the module.
 #+NAME: sort-python-modules
 #+BEGIN_SRC elisp
@@ -267,7 +289,16 @@ Sort data structures based on second element which is the name of the module.
     "Sorts data structures using data-structure-less-than"
     (sort structures python-module-less-than))
 #+END_SRC
-* TODO Replace old lines with sorted lines
+* TODO Replace Helpers
+#+NAME: replace-helpers
+#+BEGIN_SRC elisp :noweb tangle
+;; replace helpers
+
+<<insert-python-import-statement>>
+
+<<insert-python-import-statements>>
+
+#+END_SRC
 ** Helpers
 *** insert-python-import-statement
 Insert data structure string.
