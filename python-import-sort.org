@@ -287,7 +287,7 @@ Sort data structures based on second element which is the name of the module.
   ;;; sorting helper
   (defun sort-python-modules (structures)
     "Sorts data structures using data-structure-less-than"
-    (sort structures python-module-less-than))
+    (sort structures #'python-module-less-than))
 #+END_SRC
 * TODO Replace Helpers
 #+NAME: replace-helpers

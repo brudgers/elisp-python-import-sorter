@@ -54,7 +54,7 @@ Returns a dotted list of: (import-statement . sort-term)."
 ;;; sorting helper
 (defun sort-python-modules (structures)
   "Sorts data structures using data-structure-less-than"
-  (sort structures python-module-less-than))
+  (sort structures #'python-module-less-than))
 
 
 ;; replace helpers
