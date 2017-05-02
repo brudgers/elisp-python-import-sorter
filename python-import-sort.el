@@ -49,7 +49,7 @@ Returns a dotted list of: (import-statement . sort-term)."
 ;;; sorting helper
 (defun python-module-less-than (lhs rhs)
   "Returns true if the module name of the left hand side is less than the module name of the right hand side."
-  (string< (second lhs) (second rhs)))
+  (string< (cdr lhs) (cdr rhs)))
 
 ;;; sorting helper
 (defun sort-python-modules (structures)
@@ -66,7 +66,7 @@ Returns a dotted list of: (import-statement . sort-term)."
 
 (defun insert-python-import-statements (structures)
   "Inserts the ordered statements into current buffer."
-  (mapc insert-python-import-statement structures))
+  (mapc #'insert-python-import-statement structures))
 
 
 ;;; Main

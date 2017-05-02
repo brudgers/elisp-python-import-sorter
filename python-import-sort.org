@@ -224,43 +224,106 @@ The data structure is a dotted list. The first element is the original line and 
   <<parse-import-statements>>
 
 #+END_SRC
-** Helpers
-Convert a buffer to a list of strings based on lines:
-#+NAME: buffer-to-list
-#+BEGIN_SRC elisp
-  (defun buffer-to-list ()
-    "Converts a buffer to a list of lines."
-    (split-string (buffer-string) "\n" t))
+** buffer-to-list
+  + *Purpose*
+  Convert a buffer to a list of strings based on lines.
+  + *Example*
+    Given the buffer:
+    #+BEGIN_EXAMPLE
+      import m
+      import j
+      from a import n
+      from c import k
+      from b import i
+
+      def spam(a):
+          return a
+
+      spam(3)
+    #+END_EXAMPLE
+    =buffer-to-list= returns
+    #+BEGIN_EXAMPLE
+      '("import m"
+        "import j"
+        "from a import n"
+        "from c import k"
+        "from b import i"
+        "def spam(a):"
+        "    return a"
+        "spam(3)"))
+    #+END_EXAMPLE
+  + *Implementation*
+    #+NAME: buffer-to-list
+    #+BEGIN_SRC elisp
+      (defun buffer-to-list ()
+        "Converts a buffer to a list of lines."
+        (split-string (buffer-string) "\n" t))
 #+END_SRC
-The high level parsing function:
-#+NAME: parse-import-statements
-#+BEGIN_SRC elisp
-  (defun parse-import-statements (statements &optional a-list)
-    "Parses each statement in statements. Returns a list of (statement . sort-term)."
-    (if (null statements)
-        a-list
-      (parse-import-statements
-       (rest statements)
-       (cons (parse-import-statement (first statements))
-             a-list))))
+** parse-import-statements
+  + *Purpose*
+    The high level parsing function.
+  + *Examples*
+    #+BEGIN_EXAMPLE
+      given
+
+        (setq example '("import m"
+                        "import j"
+                        "from a import n"
+                        "from c import k"
+                        "from b import i"))
+      then
+
+        (parse-import-statements example)
+
+      returns:
+
+        (("from b import i" . "i")
+         ("from c import k" . "k")
+         ("from a import n" . "n")
+         ("import j" . "j")
+         ("import m" . "m"))
+    #+END_EXAMPLE
+  + *Implementation*
+    #+NAME: parse-import-statements
+    #+BEGIN_SRC elisp
+      (defun parse-import-statements (statements &optional a-list)
+        "Parses each statement in statements. Returns a list of (statement . sort-term)."
+        (if (null statements)
+            a-list
+          (parse-import-statements
+           (rest statements)
+           (cons (parse-import-statement (first statements))
+                 a-list))))
 #+END_SRC
-Parse one import statement
-#+NAME: parse-import-statement
-#+BEGIN_SRC elisp
-  (defun parse-import-statement (line)
-    "Takes a Python import statement as a string.
-  Returns a dotted list of: (import-statement . sort-term)."
-    (let* ((matcher "\\(\\w+ import \\|import \\)\\(\\w\\)")
-           (match (string-match matcher line)))
-      (cons line (match-string 2 line))))
+** parse-import-statement
+  + *Purpose*
+    Parse one import statement.
+  + *Examples*
+    #+BEGIN_EXAMPLE
+      Given
+        (parse-import-statement "from a import n")
+      Return
+        ("from a import n" . "n")
+    #+END_EXAMPLE
+  + *Implementation*
+    #+NAME: parse-import-statement
+    #+BEGIN_SRC elisp
+      (defun parse-import-statement (line)
+        "Takes a Python import statement as a string.
+      Returns a dotted list of: (import-statement . sort-term)."
+        (let* ((matcher "\\(\\w+ import \\|import \\)\\(\\w\\)")
+               (match (string-match matcher line)))
+          (cons line (match-string 2 line))))
 #+END_SRC
 *** TODO provide flexibility in matching white space
 Currently, only a single space between =import= and the name is matched.
 * TODO Sort Helpers
 ** Data Structure
-The data structure is a dotted list. The first element is the original line and the second element is the name of the python module to be imported.
-#+BEGIN_EXAMPLE
-("from a import n" . "n")
+  + *Purpose* The data structure is a dotted list. The first element is the original line and the second element is the name of the python module to be imported. Because the data structure is a dotted list rather than a proper list, the second element cannot be accessed with =second= because =second= is implemented as =(car(cdr alist))=.
+
+  + *Example* 
+    #+BEGIN_EXAMPLE
+      ("from a import n" . "n")
 #+END_EXAMPLE
 ** Template
 #+NAME: sort-helpers
@@ -272,14 +335,17 @@ The data structure is a dotted list. The first element is the original line and 
   <<sort-python-modules>>
 
 #+END_SRC
-** Helpers
-Compare two data structures based on second element which is the name of the python module.
+** python-module-less-than
+  + *Purpose*
+  Compare two data structures based on second element which is the name of the python module.
+  + *Examples*
+
 #+NAME: python-module-less-than
 #+BEGIN_SRC elisp
   ;;; sorting helper
   (defun python-module-less-than (lhs rhs)
     "Returns true if the module name of the left hand side is less than the module name of the right hand side."
-    (string< (second lhs) (second rhs)))
+    (string< (cdr lhs) (cdr rhs)))
 #+END_SRC
 Sort data structures based on second element which is the name of the module.
 #+NAME: sort-python-modules
@@ -315,7 +381,7 @@ Insert strings from all data structures. Uses =mapc= instead of =mapcar= because
 #+BEGIN_SRC elisp
   (defun insert-python-import-statements (structures)
     "Inserts the ordered statements into current buffer."
-    (mapc insert-python-import-statement structures))
+    (mapc #'insert-python-import-statement structures))
 #+END_SRC
 
 * Notes

@@ -1,0 +1,10 @@
+import m
+import j
+from a import n
+from c import k
+from b import i
+
+def spam(a):
+    return a
+
+spam(3)
