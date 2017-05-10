@@ -46,7 +46,6 @@ Returns a dotted list of: (import-statement . sort-term)."
 
 ;;; sort helpers
 
-;;; sorting helper
 (defun python-module-less-than (lhs rhs)
   "Returns true if the module name of the left hand side is less than the module name of the right hand side."
   (string< (cdr lhs) (cdr rhs)))

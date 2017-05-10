@@ -72,7 +72,7 @@ It also is an exploration in applying the /How to Design Programs/ methodology w
          (insert whole-buffer))))
 
  #+END_SRC
-* TODO Edit Temp Buffer
+* DONE Edit Temp Buffer
 #+NAME: edit-temp-buffer
 #+BEGIN_SRC elisp
   (insert whole-buffer)
@@ -317,7 +317,7 @@ The data structure is a dotted list. The first element is the original line and 
 #+END_SRC
 *** TODO provide flexibility in matching white space
 Currently, only a single space between =import= and the name is matched.
-* TODO Sort Helpers
+* DONE Sort Helpers
 ** Data Structure
   + *Purpose* The data structure is a dotted list. The first element is the original line and the second element is the name of the python module to be imported. Because the data structure is a dotted list rather than a proper list, the second element cannot be accessed with =second= because =second= is implemented as =(car(cdr alist))=.
 
@@ -339,23 +339,34 @@ Currently, only a single space between =import= and the name is matched.
   + *Purpose*
   Compare two data structures based on second element which is the name of the python module.
   + *Examples*
-
-#+NAME: python-module-less-than
-#+BEGIN_SRC elisp
-  ;;; sorting helper
-  (defun python-module-less-than (lhs rhs)
-    "Returns true if the module name of the left hand side is less than the module name of the right hand side."
-    (string< (cdr lhs) (cdr rhs)))
+        #+BEGIN_EXAMPLE
+        (python-module-less-than '("from a import n" . "n") '("import m" . "m"))
+        ; result is false
+#+END_EXAMPLE
+  + *Implementation*
+    #+NAME: python-module-less-than
+    #+BEGIN_SRC elisp
+      (defun python-module-less-than (lhs rhs)
+        "Returns true if the module name of the left hand side is less than the module name of the right hand side."
+        (string< (cdr lhs) (cdr rhs)))
 #+END_SRC
-Sort data structures based on second element which is the name of the module.
-#+NAME: sort-python-modules
-#+BEGIN_SRC elisp
-  ;;; sorting helper
-  (defun sort-python-modules (structures)
-    "Sorts data structures using data-structure-less-than"
-    (sort structures #'python-module-less-than))
+** sort-python-modules
+  + *Purpose*
+    Sort data structures based on second element which is the name of the module.
+  + *Examples*
+        #+BEGIN_EXAMPLE
+        (sort-python-modules '(("from a import n" . "n") '("import m" . "m")))
+        ; return '(("import m" . "m") ("from a import n" . "n"))
+#+END_EXAMPLE
+  + *Implementation*
+    #+NAME: sort-python-modules
+    #+BEGIN_SRC elisp
+      ;;; sorting helper
+      (defun sort-python-modules (structures)
+        "Sorts data structures using data-structure-less-than"
+        (sort structures #'python-module-less-than))
 #+END_SRC
-* TODO Replace Helpers
+* DONE Replace Helpers
 #+NAME: replace-helpers
 #+BEGIN_SRC elisp :noweb tangle
 ;; replace helpers
@@ -365,25 +376,39 @@ Sort data structures based on second element which is the name of the module.
 <<insert-python-import-statements>>
 
 #+END_SRC
-** Helpers
-*** insert-python-import-statement
-Insert data structure string.
-#+NAME: insert-python-import-statement
-#+BEGIN_SRC elisp
-  (defun insert-python-import-statement (ds)
-    "Inserts the string (car) of a data structure into current buffer"
-    (insert (car ds))
-    (newline))
+** insert-python-import-statement
+  + *Purpose*
+    Insert data structure string.
+  + *Examples*
+    #+BEGIN_EXAMPLE
+    (inster-python-import-statement '("from a import n" . "n"))
+    ; inserts "from a import n" in current buffer
+    #+END_EXAMPLE
+  + *Implementation*
+    #+NAME: insert-python-import-statement
+    #+BEGIN_SRC elisp
+      (defun insert-python-import-statement (ds)
+        "Inserts the string (car) of a data structure into current buffer"
+        (insert (car ds))
+        (newline))
 #+END_SRC
-*** insert-python-import-statements
-Insert strings from all data structures. Uses =mapc= instead of =mapcar= because it is called for side-effects.
-#+NAME: insert-python-import-statements
-#+BEGIN_SRC elisp
-  (defun insert-python-import-statements (structures)
-    "Inserts the ordered statements into current buffer."
-    (mapc #'insert-python-import-statement structures))
+** insert-python-import-statements
+  + *Purpose*
+    Insert strings from all data structures. Uses =mapc= instead of =mapcar= because it is called for side-effects.
+  + *Examples*
+    #+BEGIN_EXAMPLE
+    (insert-python-import-statements '(("import m" . "m") ("from a import n" . "n")))
+    ; inserts "import m
+    ;          from a import n" 
+    ; in current buffer.
+    #+END_EXAMPLE
+  + *Implementation*
+    #+NAME: insert-python-import-statements
+    #+BEGIN_SRC elisp
+      (defun insert-python-import-statements (structures)
+        "Inserts the ordered statements into current buffer."
+        (mapc #'insert-python-import-statement structures))
 #+END_SRC
-
 * Notes
 ** Emacs
 Some useful emacs commands including
